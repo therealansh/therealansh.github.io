@@ -1,17 +1,10 @@
 :root {
-  /* --color-background: #31037d; */
   --color-background: #cbddfb;
   --axis-x: 1px;
   --axis-y: 1rem;
   --delay: 10;
   --color-black: #000;
   --color-white: #fff;
-  /* --color-orange: #d49c3d;
-  --color-red: #d14b3d;
-  --color-violet: #cf52eb;
-  --color-blue: #44a3f7;
-  --color-green: #5acb3c;
-  --color-yellow: #debf40; */
   --color-orange: #ff901f;
   --color-red: #ff2975;
   --color-violet: #f222ff;

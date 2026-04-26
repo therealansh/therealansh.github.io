@@ -1,111 +1,441 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ansh Tyagi — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=13">
+</head>
+<body>
+<div class="page">
 
-    <title>Ansh Tyagi | A smol developer</title>
+  <nav class="nav" aria-label="Primary">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Ansh Tyagi</span>
+    </div>
+    <div class="links">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="cta" href="assets/Resume_2026.pdf" target="_blank" rel="noopener">
+        <span class="cta-text">Resume</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+      </a>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
 
-    <link rel="icon" href="favicon.ico" type="image/png" />
-    <link
-      href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/themes/indigo-white.css" />
-    <link rel="stylesheet" href="css/rainbow.css" />
-  </head>
-  <body>
-    <main>
-      <div class="intro">
-        <ul class="c-rainbow">
-          <li class="c-rainbow__layer c-rainbow__layer--white">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--orange">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--red">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--violet">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--blue">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--green">ANSH</li>
-          <li class="c-rainbow__layer c-rainbow__layer--yellow">ANSH</li>
-        </ul>
+  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="assets/Resume_2026.pdf" target="_blank" rel="noopener" class="drawer-resume">Resume ↗</a>
+  </div>
+
+  <main class="bento">
+
+    <!-- HERO -->
+    <section class="card hero col-7">
+      <div>
+        <span class="eyebrow"><span class="pulse"></span> Available for opportunities — Summer 2026</span>
+        <h1>
+          Backend engineer building <span class="accent">reliable</span> distributed systems <span class="accent">&</span> delightful developer tools.
+        </h1>
+        <p class="lede">
+          I&rsquo;m a CS Master&rsquo;s student at Stony Brook, previously a Senior Software Engineer at Headout. I like databases, programming languages, and shipping infra that looks simple from the outside.
+        </p>
       </div>
-      <div class="tagline">
-        All-Star Dev | Code Fanatic | Cryptographer | Bruv
+      <div class="meta">
+        <span>Stony Brook, NY</span>
+        <span>MS Computer Science</span>
+        <span>GPA 4.0</span>
+        <span>ex-Headout</span>
       </div>
-      <!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-      <div class="icons-social">
-        <a target="_blank" href="https://github.com/therealansh"
-          ><i class="fab fa-github"></i
-        ></a>
-        <a target="_blank" href="https://twitter.com/tyagiansh23"
-          ><i class="fab fa-twitter"></i
-        ></a>
-        <a target="_blank" href="https://stackoverflow.com/users/story/14124197"
-          ><i class="fab fa-stack-overflow"></i
-        ></a>
-        <a target="_blank" href="https://discord.com/users/thefakeansh#9455"
-          ><i class="fab fa-discord"></i
-        ></a>
-        <a target="_blank" href="https://instagram.com/therealansh"
-          ><i class="fab fa-instagram"></i
-        ></a>
+    </section>
+
+    <!-- AVATAR -->
+    <section class="card avatar-card col-5">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="face"><img src="assets/face-animoji.webp" alt="Ansh portrait" /></div>
+      <div class="overlay">
+        <div class="name">Ansh Tyagi</div>
+        <div class="role">Software Engineer · NYC / SBU</div>
       </div>
-    </main>
-    <script>
-      window.addEventListener("load", () => {
-        new Sign().print(document.body);
-      });
+    </section>
 
-      class Sign {
-        constructor(attr = {}) {
-          attr = {
-            ...attr,
-            ...{
-              href: "https://therealansh.github.io",
-              innerText: "therealansh.github.io",
-              target: "_blank",
-              style: {
-                fontFamily: "monospace",
-                fontSize: "18px",
-                fontWeight: "bold",
-                textDecoration: "none",
-                color: "rgba(255,255,255,.75)",
-                boxSizing: "border-box",
-                display: "block",
-                position: "fixed",
-                padding: "16px",
-                bottom: "16px",
-                left: "50%",
-                transform: "translateX(-50%)",
-              },
-            },
-          };
-          this.$el = this.create();
-          this.$el = this.applyAttributes(this.$el, attr);
-          return this;
-        }
+    <!-- NOW + BY THE NUMBERS (combined) -->
+    <section class="card now-stats col-5" id="work">
+      <div class="now-row">
+        <div>
+          <h3>Local time · NY</h3>
+          <div class="time" id="clock">--:--</div>
+          <div class="day" id="day">—</div>
+        </div>
+        <div class="now-weather" aria-hidden="true">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <span>High-focus<br/>10p – 2a</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats-row">
+        <div class="stat"><div class="num">95<span class="unit">%</span></div><div class="label">listing time ↓</div></div>
+        <div class="stat"><div class="num">80<span class="unit">%</span></div><div class="label">impression cost ↓</div></div>
+        <div class="stat"><div class="num">4<span class="unit">×</span></div><div class="label">collab growth</div></div>
+      </div>
+    </section>
 
-        create() {
-          return document.createElement("a");
-        }
+    <!-- EXPERIENCE -->
+    <section class="card col-7">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Experience
+      </h3>
+      <div class="xp-list">
+        <button type="button" class="xp-item" data-open="xp-senior">
+          <div class="logo headout-logo"><img src="assets/headout.gif" alt="Headout"/></div>
+          <div>
+            <div class="role">Senior Software Engineer</div>
+            <div class="company">Headout · Creators Tool &amp; Offers Platform</div>
+          </div>
+          <div class="date">Apr &rsquo;25 – Jul &rsquo;25</div>
+        </button>
+        <button type="button" class="xp-item" data-open="xp-swe">
+          <div class="logo headout-logo"><img src="assets/headout.gif" alt="Headout"/></div>
+          <div>
+            <div class="role">Software Engineer</div>
+            <div class="company">Headout · Magic Listing, Novu, Hub migration</div>
+          </div>
+          <div class="date">May &rsquo;23 – Apr &rsquo;25</div>
+        </button>
+        <button type="button" class="xp-item" data-open="xp-intern">
+          <div class="logo headout-logo"><img src="assets/headout.gif" alt="Headout"/></div>
+          <div>
+            <div class="role">Software Engineer Intern</div>
+            <div class="company">Headout · Spring WebFlux · B2B Hub foundations</div>
+          </div>
+          <div class="date">Jan &rsquo;22 – May &rsquo;23</div>
+        </button>
+        <div class="xp-item xp-edu">
+          <div class="logo">🎓</div>
+          <div>
+            <div class="role">MS Computer Science</div>
+            <div class="company">Stony Brook University · GPA 4.0</div>
+          </div>
+          <div class="date">2025 – 2027</div>
+        </div>
+      </div>
+    </section>
 
-        applyAttributes($a, attr) {
-          $a.href = attr.href;
-          $a.innerText = attr.innerText;
-          $a.target = attr.target;
-          Object.assign($a.style, attr.style);
-          return $a;
-        }
+    <!-- PROJECTS -->
+    <section class="card projects-card col-7" id="projects">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Selected Projects
+      </h3>
+      <div class="projects-list">
+        <button type="button" class="proj-row" data-open="p-sam">
+          <div class="proj-thumb" style="background: linear-gradient(160deg, oklch(0.92 0.05 320), oklch(0.96 0.02 290));"><img src="assets/sam-proj.webp" alt=""/></div>
+          <div class="proj-body">
+            <div class="proj-title">SAM — Smart Attendance Monitor</div>
+            <div class="proj-desc">Face-recognition attendance with retrainable models &amp; analytics.</div>
+          </div>
+          <div class="proj-tags"><span class="pill">Flutter</span><span class="pill">TF</span></div>
+        </button>
+        <button type="button" class="proj-row" data-open="p-mvcc">
+          <div class="proj-thumb" style="background: linear-gradient(160deg, oklch(0.96 0.02 260), oklch(0.92 0.04 270));">
+            <svg width="60" height="60" viewBox="0 0 180 180" fill="none">
+              <rect x="20" y="40" width="28" height="100" rx="4" fill="#fff" stroke="oklch(0.8 0.04 270)"/>
+              <rect x="54" y="40" width="28" height="100" rx="4" fill="#fff" stroke="oklch(0.8 0.04 270)"/>
+              <rect x="88" y="40" width="28" height="100" rx="4" fill="oklch(0.58 0.22 290)"/>
+              <rect x="122" y="40" width="28" height="100" rx="4" fill="#fff" stroke="oklch(0.8 0.04 270)"/>
+            </svg>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Column-Delta MVCC</div>
+            <div class="proj-desc">Schema-aware MVCC in Mako — 69% storage reduction on TPC-C.</div>
+          </div>
+          <div class="proj-tags"><span class="pill">C++</span></div>
+        </button>
+        <button type="button" class="proj-row" data-open="p-vlfit">
+          <div class="proj-thumb" style="background: linear-gradient(160deg, oklch(0.95 0.02 200), oklch(0.92 0.04 220));">
+            <svg width="60" height="54" viewBox="0 0 200 180">
+              <rect x="30" y="40" width="140" height="100" rx="14" fill="#fff" stroke="oklch(0.82 0.04 220)"/>
+              <rect x="46" y="58" width="60" height="60" rx="8" fill="oklch(0.9 0.04 220)"/>
+              <circle cx="76" cy="82" r="8" fill="oklch(0.58 0.22 290)"/>
+              <rect x="116" y="64" width="42" height="6" rx="3" fill="oklch(0.82 0.04 220)"/>
+              <rect x="116" y="78" width="34" height="6" rx="3" fill="oklch(0.86 0.03 220)"/>
+              <rect x="116" y="92" width="42" height="6" rx="3" fill="oklch(0.86 0.03 220)"/>
+            </svg>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">VLFit Benchmark</div>
+            <div class="proj-desc">Spatial reasoning benchmark across 6 vision-language models.</div>
+          </div>
+          <div class="proj-tags"><span class="pill">Python</span></div>
+        </button>
+        <button type="button" class="proj-row" data-open="p-fxlang">
+          <div class="proj-thumb" style="background: linear-gradient(160deg, oklch(0.94 0.03 30), oklch(0.92 0.04 20)); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: oklch(0.4 0.02 30);">fn&nbsp;()</div>
+          <div class="proj-body">
+            <div class="proj-title">fxlang</div>
+            <div class="proj-desc">Interpreted OOP language in Rust with a bytecode VM.</div>
+          </div>
+          <div class="proj-tags"><span class="pill">Rust</span></div>
+        </button>
+      </div>
+    </section>
 
-        print($container) {
-          $container.appendChild(this.$el);
-        }
-      }
-    </script>
-  </body>
+    <!-- STACK (dense) -->
+    <section class="card stack-card col-5" id="skills">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Stack I reach for
+      </h3>
+      <div class="stack-grid">
+        <div class="stack-chip"><span class="glyph">Kt</span>Kotlin</div>
+        <div class="stack-chip"><span class="glyph">Rs</span>Rust</div>
+        <div class="stack-chip"><span class="glyph">Go</span>Go</div>
+        <div class="stack-chip"><span class="glyph">Py</span>Python</div>
+        <div class="stack-chip"><span class="glyph">Jv</span>Java</div>
+        <div class="stack-chip"><span class="glyph">C+</span>C/C++</div>
+        <div class="stack-chip"><span class="glyph">SQ</span>SQL</div>
+        <div class="stack-chip"><span class="glyph">Ts</span>TS/JS</div>
+      </div>
+      <div class="stack-code" aria-hidden="true">
+<span class="c">// what i'm usually doing</span>
+<span class="k">fn</span> <span class="fn">build</span>(idea: <span class="t">Idea</span>) -&gt; <span class="t">Result</span>&lt;<span class="t">Product</span>&gt; {
+  <span class="k">let</span> infra = <span class="fn">stand_up</span>(<span class="s">"kafka+postgres"</span>)?;
+  <span class="k">let</span> api   = <span class="fn">spring_boot</span>(&amp;infra).<span class="fn">ship</span>();
+  <span class="c">// measure. iterate. repeat.</span>
+  <span class="k">Ok</span>(api)
+}</div>
+      <div class="langs">
+        <span class="lang">Spring Boot</span>
+        <span class="lang">Kafka</span>
+        <span class="lang">Postgres</span>
+        <span class="lang">Redis</span>
+        <span class="lang">Kubernetes</span>
+        <span class="lang">AWS</span>
+        <span class="lang">GCP</span>
+        <span class="lang">TensorFlow</span>
+      </div>
+    </section>
+
+    <!-- CONTACT (dark, seamless video) -->
+    <section class="card contact-card col-7" id="contact">
+      <div class="v-wrap">
+        <video src="assets/contact-face.mp4" autoplay muted loop playsinline></video>
+        <div class="v-fade" aria-hidden="true"></div>
+      </div>
+      <div class="c-body">
+        <h3>Say hi</h3>
+        <div class="big">Let&rsquo;s build something <em>unreasonable.</em></div>
+        <div class="s">Fastest via email — I usually reply within a day.</div>
+        <div class="contact-links">
+          <a href="/cdn-cgi/l/email-protection#2f4e415c47015b564e48466f5c5b4041564d5d404044014a4b5a">✉  Email</a>
+          <a href="https://linkedin.com/in/therealansh" target="_blank" rel="noopener">in  LinkedIn</a>
+          <a href="https://github.com/therealansh" target="_blank" rel="noopener">{ }  GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATION -->
+    <section class="card pub-card col-5">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Published
+      </h3>
+      <div class="big">Dynamic Lightweight Elliptic Curve Cryptography</div>
+      <p class="sub">COMS2, Springer · Feb 2021. First-author paper on a lighter-weight ECC variant for constrained devices.</p>
+      <div class="pub-glyph" aria-hidden="true">§</div>
+    </section>
+
+    <!-- WINS -->
+    <section class="card col-7">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
+        Wins
+      </h3>
+      <div class="big" style="font-size: 22px;">Smart India Hackathon &rsquo;22 — Winner</div>
+      <p class="sub">Plus: ran Hackout with 12k+ applications and 3,500 RSVPs.</p>
+      <div class="wave" aria-hidden="true">
+        <span style="animation-delay:0s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.3s;"></span><span style="animation-delay:0.4s;"></span><span style="animation-delay:0.5s;"></span><span style="animation-delay:0.4s;"></span><span style="animation-delay:0.3s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.3s;"></span>
+      </div>
+    </section>
+
+    <!-- LOCATION — NYC skyline -->
+    <section class="card map-card col-5">
+      <div class="skyline">
+        <img src="assets/nyc-skyline.png" alt="New York City skyline" class="skyline-img"/>
+        <div class="skyline-tint" aria-hidden="true"></div>
+        <div class="pin-stack">
+          <div class="pin-ring"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-label">Stony Brook · 60 mi east</div>
+        </div>
+      </div>
+      <div class="label">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em;">Stony Brook, NY</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:2px;">Based here · open to remote</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--ink-3);font-family:'JetBrains Mono', monospace;">40.91°N</div>
+        </div>
+      </div>
+        </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Ansh Tyagi</span>
+    <span class="sep">·</span>
+    <span>Built with care</span>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-scrim" data-close></div>
+  <article class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-body" id="modalBody"></div>
+  </article>
+</div>
+
+<div id="modal-data" hidden>
+  <template data-id="p-sam">
+    <div class="m-hero" style="background: linear-gradient(160deg, oklch(0.92 0.05 320), oklch(0.96 0.02 290));"><img src="assets/sam-proj.webp" alt="" style="max-height: 340px;"/></div>
+    <div class="m-content">
+      <div class="m-tagline">Personal build · 2022</div>
+      <h2>SAM — Smart Attendance Monitor</h2>
+      <p>A face-recognition-based attendance app for classrooms. Full offline-first native mobile experience, retrainable face-recognition pipeline, and weekly analytics with one-tap appeals.</p>
+      <ul class="m-bullets">
+        <li>Trained a face-recognition model on TensorFlow Lite with on-device retraining — new faces added in under 8 seconds on mid-range Android.</li>
+        <li>Native Flutter UI with a calm, ceremonial aesthetic — less surveillance, more daily ritual.</li>
+        <li>Analytics dashboard with weekly trends, anomaly flagging, and a light-touch appeal flow.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">Flutter</span><span class="lang">Dart</span><span class="lang">TensorFlow Lite</span><span class="lang">OpenCV</span></div>
+      <div class="m-links"><a class="m-btn" href="https://github.com/therealansh" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+  </template>
+
+  <template data-id="p-mvcc">
+    <div class="m-hero" style="background: linear-gradient(160deg, oklch(0.96 0.02 260), oklch(0.88 0.05 270));">
+      <svg width="220" height="220" viewBox="0 0 180 180">
+        <rect x="20" y="40" width="28" height="100" rx="4" fill="#fff"/><rect x="54" y="40" width="28" height="100" rx="4" fill="#fff"/><rect x="88" y="40" width="28" height="100" rx="4" fill="oklch(0.58 0.22 290)"/><rect x="122" y="40" width="28" height="100" rx="4" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="m-content">
+      <div class="m-tagline">Research · SBU · 2025</div>
+      <h2>Column-Delta Multi-Version Concurrency Control</h2>
+      <p>A schema-aware MVCC optimization in Mako that stores only modified columns. Integrated into a distributed KV store with 481 lines of reusable code.</p>
+      <ul class="m-bullets">
+        <li><strong>69%</strong> MVCC storage reduction on TPC-C.</li>
+        <li>Within <strong>1%</strong> throughput of the baseline.</li>
+        <li>Clean abstraction layer that plugs into any column-store MVCC path.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">C++</span><span class="lang">Mako</span><span class="lang">TPC-C</span></div>
+      <div class="m-links"><a class="m-btn" href="https://github.com/therealansh" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+  </template>
+
+  <template data-id="p-vlfit">
+    <div class="m-hero" style="background: linear-gradient(160deg, oklch(0.95 0.02 200), oklch(0.88 0.06 220));">
+      <svg width="220" height="200" viewBox="0 0 200 180">
+        <rect x="30" y="40" width="140" height="100" rx="14" fill="#fff"/><rect x="46" y="58" width="60" height="60" rx="8" fill="oklch(0.9 0.04 220)"/><circle cx="76" cy="82" r="8" fill="oklch(0.58 0.22 290)"/><rect x="116" y="64" width="42" height="6" rx="3" fill="oklch(0.82 0.04 220)"/><rect x="116" y="78" width="34" height="6" rx="3" fill="oklch(0.86 0.03 220)"/><rect x="116" y="92" width="42" height="6" rx="3" fill="oklch(0.86 0.03 220)"/><rect x="46" y="126" width="112" height="6" rx="3" fill="oklch(0.58 0.22 290)"/>
+      </svg>
+    </div>
+    <div class="m-content">
+      <div class="m-tagline">Research · 2025</div>
+      <h2>VLFit — Vision-Language Spatial Reasoning Benchmark</h2>
+      <p>A benchmark for fit-in constraint spatial reasoning across 220 real-world image–question pairs spanning 60–70 object categories.</p>
+      <ul class="m-bullets">
+        <li>Evaluated <strong>6</strong> state-of-the-art vision-language models.</li>
+        <li>Best accuracy topped out at <strong>60.9%</strong>; numeric spatial reasoning scored <strong>5.7%–22.9%</strong>.</li>
+        <li>Exposes a clear weakness: VLMs can describe space but can&rsquo;t reason about fit.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">Python</span><span class="lang">PyTorch</span></div>
+      <div class="m-links"><a class="m-btn" href="https://github.com/therealansh" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+  </template>
+
+  <template data-id="p-fxlang">
+    <div class="m-hero" style="background: linear-gradient(160deg, oklch(0.94 0.03 30), oklch(0.88 0.06 20));">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: oklch(0.3 0.02 30); line-height: 1.7; text-align:left;">
+        <div><span style="color: oklch(0.58 0.22 290);">fn</span> main() {</div>
+        <div>&nbsp;&nbsp;<span style="color: oklch(0.55 0.15 150);">let</span> x = <span style="color: oklch(0.6 0.18 30);">42</span>;</div>
+        <div>&nbsp;&nbsp;print(x);</div>
+        <div>}</div>
+      </div>
+    </div>
+    <div class="m-content">
+      <div class="m-tagline">Side project · 2024</div>
+      <h2>fxlang</h2>
+      <p>An interpreted object-oriented programming language in Rust. Tree-walking interpreter, then a bytecode VM for speed. First-class functions, closures, and classes — built end-to-end from lexer to GC.</p>
+      <div class="m-tags"><span class="lang">Rust</span><span class="lang">Bytecode VM</span></div>
+      <div class="m-links"><a class="m-btn" href="https://github.com/therealansh" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+  </template>
+
+  <template data-id="xp-senior">
+    <div class="m-hero m-hero-headout"><img src="assets/headout.gif" alt="Headout" style="width: 180px;"/><div class="m-hero-label">Senior Software Engineer · Apr 2025 – Jul 2025</div></div>
+    <div class="m-content">
+      <div class="m-tagline">Headout · Bengaluru</div>
+      <h2>Creators Tool &amp; Offers Management</h2>
+      <p>Led backend for two new product surfaces at the top of Headout&rsquo;s supply funnel.</p>
+      <ul class="m-bullets">
+        <li>Sole backend dev for <strong>Creators Tool</strong>. Onboarding dropped <strong>13 days → 10 min</strong>, impression cost <strong>-80%</strong>, 15-day content completion <strong>50%</strong>, collab volume <strong>4×</strong> in 3 months.</li>
+        <li>Launched <strong>Offers Management</strong>: conversion <strong>+30%</strong>, support discounts <strong>-12%</strong>, <strong>66%</strong> adoption within a month.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">Kotlin</span><span class="lang">Spring Boot</span><span class="lang">Postgres</span><span class="lang">Kafka</span></div>
+    </div>
+  </template>
+
+  <template data-id="xp-swe">
+    <div class="m-hero m-hero-headout"><img src="assets/headout.gif" alt="Headout" style="width: 180px;"/><div class="m-hero-label">Software Engineer · May 2023 – Apr 2025</div></div>
+    <div class="m-content">
+      <div class="m-tagline">Headout · Bengaluru</div>
+      <h2>Magic Listing · Novu · Hub</h2>
+      <p>Three pieces of backend infra that cut operational cost and unlocked scale.</p>
+      <ul class="m-bullets">
+        <li><strong>Magic Listing</strong> — automated 3rd-party vendor integrations. Listing time <strong>72 → 4 min</strong>.</li>
+        <li><strong>Novu-based Notifications</strong> — TAT <strong>-40%</strong>, comm errors <strong>-60%</strong>.</li>
+        <li><strong>Schedule Management</strong> — one-click supplier→Hub migration. Processing time <strong>-33%</strong>.</li>
+        <li>Orchestrated <strong>Hackout</strong>, its largest edition — 12k+ applications, 3,500 RSVPs, 300+ teams.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">Kotlin</span><span class="lang">Novu</span><span class="lang">GraphQL</span></div>
+    </div>
+  </template>
+
+  <template data-id="xp-intern">
+    <div class="m-hero m-hero-headout"><img src="assets/headout.gif" alt="Headout" style="width: 180px;"/><div class="m-hero-label">Software Engineer Intern · Jan 2022 – May 2023</div></div>
+    <div class="m-content">
+      <div class="m-tagline">Headout · Bengaluru</div>
+      <h2>Hub Backend Foundations</h2>
+      <p>One of the first backend engineers on Headout&rsquo;s new B2B product — helped set the tech bar.</p>
+      <ul class="m-bullets">
+        <li>Scalable backend in <strong>Spring WebFlux</strong> — REST + GraphQL. TDD with <strong>96%</strong> coverage.</li>
+        <li>Owner of the <strong>London Theatre Direct</strong> plugin — order success rate <strong>+80%</strong>.</li>
+        <li>Led <strong>Native Listing</strong>: direct supplier integration on Hub, <strong>+30%</strong> operational efficiency.</li>
+      </ul>
+      <div class="m-tags"><span class="lang">Java</span><span class="lang">Spring WebFlux</span></div>
+    </div>
+  </template>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js?v=13"></script>
+</body>
 </html>

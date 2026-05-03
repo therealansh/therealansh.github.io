@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
 <div class="page">
@@ -126,14 +126,14 @@
           </div>
           <div class="date">Jan &rsquo;22 – May &rsquo;23</div>
         </button>
-        <div class="xp-item xp-edu">
-          <div class="logo">🎓</div>
-          <div>
-            <div class="role">MS Computer Science</div>
-            <div class="company">Stony Brook University · GPA 4.0</div>
-          </div>
-          <div class="date">2025 – 2027</div>
-        </div>
+<!--        <div class="xp-item xp-edu">-->
+<!--          <div class="logo">🎓</div>-->
+<!--          <div>-->
+<!--            <div class="role">MS Computer Science</div>-->
+<!--            <div class="company">Stony Brook University · GPA 4.0</div>-->
+<!--          </div>-->
+<!--          <div class="date">2025 – 2027</div>-->
+<!--        </div>-->
       </div>
     </section>
 
@@ -242,7 +242,7 @@
         <div class="big">Let&rsquo;s build something <em>unreasonable.</em></div>
         <div class="s">Fastest via email — I usually reply within a day.</div>
         <div class="contact-links">
-          <a href="mailto:tyagiansh23@gmail.com">✉  Email</a>
+          <a href="/cdn-cgi/l/email-protection#7b1a150813550f021a1c123b080f1415021909141410551e1f0e">✉  Email</a>
           <a href="https://linkedin.com/in/therealansh" target="_blank" rel="noopener">in  LinkedIn</a>
           <a href="https://github.com/therealansh" target="_blank" rel="noopener">{ }  GitHub</a>
         </div>
@@ -260,21 +260,58 @@
       <div class="pub-glyph" aria-hidden="true">§</div>
     </section>
 
-    <!-- WINS -->
-    <section class="card col-7">
-      <h3>
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
-        Wins
-      </h3>
-      <div class="big" style="font-size: 22px;">Smart India Hackathon &rsquo;22 — Winner</div>
-      <p class="sub">Plus: ran Hackout with 12k+ applications and 3,500 RSVPs.</p>
-      <div class="wave" aria-hidden="true">
-        <span style="animation-delay:0s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.3s;"></span><span style="animation-delay:0.4s;"></span><span style="animation-delay:0.5s;"></span><span style="animation-delay:0.4s;"></span><span style="animation-delay:0.3s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0s;"></span><span style="animation-delay:0.1s;"></span><span style="animation-delay:0.2s;"></span><span style="animation-delay:0.3s;"></span>
+    <!-- PHOTOS — Apple Photos widget (square) -->
+    <section class="card photos-card col-4">
+      <div class="photos-stage">
+        <div class="photo-frame" id="photoFrame">
+          <div class="photo-slide active" style="background-image:url('assets/photo-2.png')" data-caption="Mt. Rainier" data-when="3 weeks ago"></div>
+          <div class="photo-slide" style="background-image:url('assets/photo-1.png')" data-caption="Puget Sound" data-when="1 month ago"></div>
+          <div class="photo-slide" style="background-image:url('assets/photo-3.png')" data-caption="Golden hour" data-when="2 months ago"></div>
+          <div class="photo-slide" style="background-image:url('assets/photo-4.png')" data-caption="Long Island" data-when="6 months ago"></div>
+          <div class="photo-overlay">
+            <div class="photo-when" id="photoWhen">3 weeks ago</div>
+            <div class="photo-caption" id="photoCaption">Mt. Rainier</div>
+          </div>
+          <button type="button" class="photo-nav photo-prev" aria-label="Previous photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="photo-nav photo-next" aria-label="Next photo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSIC — Apple Music widget (square) -->
+    <section class="card music-card col-4">
+      <div class="music-art" aria-hidden="true">
+        <div class="music-art-grad"></div>
+        <div class="music-art-rings">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="music-art-note">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l8-2v13.5a3.5 3.5 0 1 1-2-3.16V5.28l-6 1.5v10.72a3.5 3.5 0 1 1-2-3.16V3z"/></svg>
+        </div>
+      </div>
+      <div class="music-meta">
+        <div class="music-eyebrow">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M12 3l8-2v13.5a3.5 3.5 0 1 1-2-3.16V5.28l-6 1.5v10.72a3.5 3.5 0 1 1-2-3.16V3z"/></svg>
+          Now Playing
+        </div>
+        <div class="music-title">Midnight City</div>
+        <div class="music-artist">M83 · Hurry Up, We&rsquo;re Dreaming</div>
+        <div class="music-bar">
+          <div class="music-bar-fill"></div>
+        </div>
+        <div class="music-time">
+          <span>1:42</span>
+          <span>4:03</span>
+        </div>
       </div>
     </section>
 
     <!-- LOCATION — NYC skyline -->
-    <section class="card map-card col-5">
+    <section class="card map-card col-4">
       <div class="skyline">
         <img src="assets/nyc-skyline.png" alt="New York City skyline" class="skyline-img"/>
         <div class="skyline-tint" aria-hidden="true"></div>
@@ -323,6 +360,7 @@
       <h2>SAM — Smart Attendance Monitor</h2>
       <p>A face-recognition-based attendance app for classrooms. Full offline-first native mobile experience, retrainable face-recognition pipeline, and weekly analytics with one-tap appeals.</p>
       <ul class="m-bullets">
+        <li><strong>Smart India Hackathon &rsquo;22 — Winner.</strong> Built and demoed end-to-end at the national finals.</li>
         <li>Trained a face-recognition model on TensorFlow Lite with on-device retraining — new faces added in under 8 seconds on mid-range Android.</li>
         <li>Native Flutter UI with a calm, ceremonial aesthetic — less surveillance, more daily ritual.</li>
         <li>Analytics dashboard with weekly trends, anomaly flagging, and a light-touch appeal flow.</li>

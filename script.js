@@ -72,7 +72,27 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
 });
 
-// ———————————— MOBILE NAV ————————————
+// ———————————— PHOTOS WIDGET ————————————
+const photoFrame = document.getElementById('photoFrame');
+if (photoFrame) {
+  const slides = photoFrame.querySelectorAll('.photo-slide');
+  const whenEl = document.getElementById('photoWhen');
+  const captionEl = document.getElementById('photoCaption');
+  const prevBtn = photoFrame.querySelector('.photo-prev');
+  const nextBtn = photoFrame.querySelector('.photo-next');
+  let idx = 0;
+  function showPhoto(n) {
+    idx = (n + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    const cur = slides[idx];
+    if (whenEl) whenEl.textContent = cur.dataset.when || '';
+    if (captionEl) captionEl.textContent = cur.dataset.caption || '';
+  }
+  if (prevBtn) prevBtn.addEventListener('click', () => showPhoto(idx - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => showPhoto(idx + 1));
+  // Auto-advance
+  setInterval(() => showPhoto(idx + 1), 5000);
+}
 const navToggle = document.querySelector('.nav-toggle');
 const navDrawer = document.getElementById('navDrawer');
 const navScrim = document.getElementById('navScrim');

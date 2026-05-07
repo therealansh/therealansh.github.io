@@ -85,7 +85,7 @@ const PHOTO_LIBRARY = {
      { src: 'assets/photo-4.png', caption: 'Long Island',  when: '6 months ago' },
   ],
   food: [
-      { src: 'assets/photo-5.png', caption: 'Long Island',  when: '6 months ago' },
+      { src: 'assets/photo-5.png', caption: 'Pasta night',  when: '2 months ago' },
   ],
 };
 

@@ -73,25 +73,81 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ———————————— PHOTOS WIDGET ————————————
+// To add photos, drop new entries into PHOTO_LIBRARY under the matching category.
+// Each entry: { src, caption, when }. The widget builds slides from this list.
+const PHOTO_LIBRARY = {
+  travel: [
+    { src: 'assets/photo-2.png', caption: 'Mt. Rainier',  when: '3 weeks ago' },
+    { src: 'assets/photo-1.png', caption: 'Puget Sound',  when: '1 month ago' },
+      { src: 'assets/photo-3.png', caption: 'Golden hour',  when: '2 months ago' },
+  ],
+  love: [
+     { src: 'assets/photo-4.png', caption: 'Long Island',  when: '6 months ago' },
+  ],
+  food: [
+      { src: 'assets/photo-5.png', caption: 'Long Island',  when: '6 months ago' },
+  ],
+};
+
 const photoFrame = document.getElementById('photoFrame');
 if (photoFrame) {
-  const slides = photoFrame.querySelectorAll('.photo-slide');
   const whenEl = document.getElementById('photoWhen');
   const captionEl = document.getElementById('photoCaption');
-  const prevBtn = photoFrame.querySelector('.photo-prev');
-  const nextBtn = photoFrame.querySelector('.photo-next');
+  const tabs = Array.from(photoFrame.querySelectorAll('.photo-tab'));
+  const overlay = photoFrame.querySelector('.photo-overlay');
+  let category = 'travel';
   let idx = 0;
-  function showPhoto(n) {
-    idx = (n + slides.length) % slides.length;
+  let slides = []; // DOM elements for current category
+  let autoTimer = null;
+
+  function buildSlides(cat) {
+    // Remove any existing slides
+    photoFrame.querySelectorAll('.photo-slide').forEach(s => s.remove());
+    const list = PHOTO_LIBRARY[cat] || [];
+    slides = list.map((item, i) => {
+      const el = document.createElement('div');
+      el.className = 'photo-slide' + (i === 0 ? ' active' : '');
+      el.style.backgroundImage = `url('${item.src}')`;
+      el.dataset.caption = item.caption || '';
+      el.dataset.when = item.when || '';
+      // Insert before overlay so overlay/tabs stay on top
+      photoFrame.insertBefore(el, overlay);
+      return el;
+    });
+  }
+  function render() {
+    if (!slides.length) {
+      if (whenEl) whenEl.textContent = '';
+      if (captionEl) captionEl.textContent = 'No photos';
+      return;
+    }
+    idx = ((idx % slides.length) + slides.length) % slides.length;
     slides.forEach((s, i) => s.classList.toggle('active', i === idx));
     const cur = slides[idx];
     if (whenEl) whenEl.textContent = cur.dataset.when || '';
     if (captionEl) captionEl.textContent = cur.dataset.caption || '';
   }
-  if (prevBtn) prevBtn.addEventListener('click', () => showPhoto(idx - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => showPhoto(idx + 1));
+  function setCategory(cat) {
+    category = cat;
+    idx = 0;
+    buildSlides(cat);
+    tabs.forEach(t => {
+      const on = t.dataset.cat === cat;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+    render();
+  }
+  tabs.forEach(t => t.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setCategory(t.dataset.cat);
+  }));
   // Auto-advance
-  setInterval(() => showPhoto(idx + 1), 5000);
+  autoTimer = setInterval(() => {
+    if (slides.length > 1) { idx += 1; render(); }
+  }, 5000);
+
+  setCategory('travel');
 }
 const navToggle = document.querySelector('.nav-toggle');
 const navDrawer = document.getElementById('navDrawer');

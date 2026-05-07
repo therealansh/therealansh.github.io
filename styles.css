@@ -452,6 +452,66 @@ button.xp-item:hover { background: var(--card); transform: translateX(3px); box-
 .photo-prev { left: 14px; }
 .photo-next { right: 14px; }
 
+/* Apple Photos logo — top-right corner */
+.photos-applogo {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 40px; height: 40px;
+  z-index: 4;
+  border-radius: 10px;
+  filter: drop-shadow(0 4px 10px oklch(0.15 0.02 280 / 0.35));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Category tabs — Apple-style frosted pill, bottom center, emoji-only */
+.photo-tabs {
+  position: absolute;
+  bottom: 22px; left: 50%;
+  transform: translate(-50%, 4px);
+  z-index: 4;
+  display: flex;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 6px 18px oklch(0.15 0.02 280 / 0.25);
+  opacity: 0;
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
+  pointer-events: none;
+}
+.photos-card:hover .photo-tabs,
+.photos-card:focus-within .photo-tabs,
+.photo-tabs.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.photo-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.photo-tab .emoji { font-size: 18px; line-height: 1; }
+.photo-tab:hover { background: rgba(255,255,255,0.14); }
+.photo-tab.active {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 6px oklch(0.15 0.02 280 / 0.18);
+}
+
+/* On touch devices, keep tabs visible (no hover) */
+@media (hover: none) {
+  .photo-tabs { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+}
+
 /* MUSIC — Apple Music square widget */
 .music-card {
   padding: 18px;

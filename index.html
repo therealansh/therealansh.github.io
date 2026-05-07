@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=18">
+<link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body>
 <div class="page">
@@ -242,7 +242,7 @@
         <div class="big">Let&rsquo;s build something <em>unreasonable.</em></div>
         <div class="s">Fastest via email — I usually reply within a day.</div>
         <div class="contact-links">
-          <a href="/cdn-cgi/l/email-protection#7b1a150813550f021a1c123b080f1415021909141410551e1f0e">✉  Email</a>
+          <a href="/cdn-cgi/l/email-protection#dabbb4a9b2f4aea3bbbdb39aa9aeb5b4a3b8a8b5b5b1f4bfbeaf">✉  Email</a>
           <a href="https://linkedin.com/in/therealansh" target="_blank" rel="noopener">in  LinkedIn</a>
           <a href="https://github.com/therealansh" target="_blank" rel="noopener">{ }  GitHub</a>
         </div>
@@ -264,20 +264,22 @@
     <section class="card photos-card col-4">
       <div class="photos-stage">
         <div class="photo-frame" id="photoFrame">
-          <div class="photo-slide active" style="background-image:url('assets/photo-2.png')" data-caption="Mt. Rainier" data-when="3 weeks ago"></div>
-          <div class="photo-slide" style="background-image:url('assets/photo-1.png')" data-caption="Puget Sound" data-when="1 month ago"></div>
-          <div class="photo-slide" style="background-image:url('assets/photo-3.png')" data-caption="Golden hour" data-when="2 months ago"></div>
-          <div class="photo-slide" style="background-image:url('assets/photo-4.png')" data-caption="Long Island" data-when="6 months ago"></div>
           <div class="photo-overlay">
-            <div class="photo-when" id="photoWhen">3 weeks ago</div>
-            <div class="photo-caption" id="photoCaption">Mt. Rainier</div>
+            <div class="photo-when" id="photoWhen"></div>
+            <div class="photo-caption" id="photoCaption"></div>
           </div>
-          <button type="button" class="photo-nav photo-prev" aria-label="Previous photo">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="photo-nav photo-next" aria-label="Next photo">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
+          <img src="assets/photos-app-icon.webp" alt="Photos" class="photos-applogo"/>
+          <div class="photo-tabs" id="photoTabs" role="tablist" aria-label="Photo category">
+            <button type="button" class="photo-tab active" data-cat="travel" role="tab" aria-selected="true" aria-label="Travel">
+              <span class="emoji">⛰️</span>
+            </button>
+            <button type="button" class="photo-tab" data-cat="love" role="tab" aria-selected="false" aria-label="Love">
+              <span class="emoji">❤️</span>
+            </button>
+            <button type="button" class="photo-tab" data-cat="food" role="tab" aria-selected="false" aria-label="Food">
+              <span class="emoji">🍜</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -474,6 +476,6 @@
   </template>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js?v=13"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js?v=15"></script>
 </body>
 </html>

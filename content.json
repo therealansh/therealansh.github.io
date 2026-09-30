@@ -1,0 +1,537 @@
+{
+  "_readme": "Edit this file to update the site. Text wrapped in *single stars* becomes the violet serif accent (hero); **double stars** become bold (modal bullets). Add or remove items in any list and the layout adapts. Each project can have a \"reel\": a list of scenes (kind: line | stat | code | image | title) that plays as a short launch video in the Projects card.",
+  "profile": {
+    "name": "Ansh Tyagi",
+    "role": "Software Engineer",
+    "email": "ansh.tyagi@stonybrook.edu",
+    "linkedin": "https://linkedin.com/in/therealansh",
+    "github": "https://github.com/therealansh",
+    "resume": "assets/Resume_2026.pdf",
+    "avatar": "assets/face-animoji.webp"
+  },
+  "nav": [
+    {
+      "label": "Work",
+      "href": "#work"
+    },
+    {
+      "label": "Projects",
+      "href": "#projects"
+    },
+    {
+      "label": "Skills",
+      "href": "#skills"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ],
+  "hero": {
+    "status": "Open to full time roles starting May 2027",
+    "headline": "Fast systems. *Quietly* reliable.",
+    "lede": "I’m Ansh, a backend and distributed-systems engineer. MS CS at Stony Brook; most recently on Intuit’s Identity & Session Platform, before that three and a half years at Headout.",
+    "facts": [
+      "Stony Brook, NY",
+      "MS Computer Science · GPA 4.0",
+      "ex-Intuit",
+      "ex-Headout"
+    ]
+  },
+  "metrics": [
+    {
+      "from": "4.2s",
+      "to": "300ms",
+      "label": "p99 bulk authorization",
+      "where": "Intuit",
+      "count": [
+        4200,
+        300
+      ],
+      "unit": "ms"
+    },
+    {
+      "from": "60+",
+      "to": "0",
+      "label": "503s per rollout",
+      "where": "Intuit",
+      "count": [
+        60,
+        0
+      ],
+      "unit": ""
+    },
+    {
+      "from": "72",
+      "to": "4 min",
+      "label": "vendor listing time",
+      "where": "Headout",
+      "count": [
+        72,
+        4
+      ],
+      "unit": " min"
+    },
+    {
+      "from": "13 days",
+      "to": "10 min",
+      "label": "creator onboarding",
+      "where": "Headout",
+      "count": [
+        18720,
+        10
+      ],
+      "unit": " min"
+    }
+  ],
+  "experience": [
+    {
+      "id": "xp-intuit",
+      "company": "Intuit",
+      "logo": "",
+      "monogram": "i",
+      "hue": 250,
+      "role": "Software Engineer Intern",
+      "summary": "Intuit · Identity & Session Platform",
+      "dates": "May ’26 – Aug ’26",
+      "heroLabel": "Software Engineer Intern · May 2026 – Aug 2026",
+      "tagline": "Intuit · Mountain View, CA",
+      "title": "Identity & Session Platform",
+      "intro": "Services powering SSO across TurboTax, QuickBooks, Credit Karma, and Mailchimp, spanning billions of token-validation requests for 100M+ customers at 99.9%+ availability.",
+      "bullets": [
+        "Reduced p99 latency from **4.2s to 300ms** for bulk authorization in Intuit Enterprise Suite, scaling to **5,000 accounts/user at 200 TPS** via a rate-limited async batched-write path that removed DynamoDB hot-partition throttling.",
+        "Eliminated deployment-related 503 errors (**60+ to 0** per rollout) by adding graceful shutdown via Kubernetes preStop hooks."
+      ],
+      "tags": [
+        "Java",
+        "DynamoDB",
+        "Kubernetes",
+        "OAuth 2.0",
+        "OIDC"
+      ]
+    },
+    {
+      "id": "xp-senior",
+      "company": "Headout",
+      "logo": "assets/headout.gif",
+      "hue": 290,
+      "role": "Senior Software Engineer",
+      "summary": "Headout · Creators Platform & Offers",
+      "dates": "Apr ’25 – Jul ’25",
+      "heroLabel": "Senior Software Engineer · Apr 2025 – Jul 2025",
+      "tagline": "Headout · Bengaluru",
+      "title": "Creators Platform & Offers Management",
+      "intro": "Led backend for two new product surfaces at the top of Headout’s supply funnel.",
+      "bullets": [
+        "Architected the **Creators Platform** backend from scratch as sole engineer (Spring Boot, Kafka, Redis), cutting onboarding from **13 days to 10 minutes** and growing collaborations from **50 to 700 creators per quarter**.",
+        "Reduced creator impression cost **80%** and raised 15-day content completion to **50%** by owning the event-driven content pipeline and economics.",
+        "Built **Offers Management** for supply partners with configurable discount controls: conversion up to **+30%**, **66%** adoption within a month, discount-related support tickets **-12%**."
+      ],
+      "tags": [
+        "Kotlin",
+        "Spring Boot",
+        "Kafka",
+        "Redis",
+        "Postgres"
+      ]
+    },
+    {
+      "id": "xp-swe",
+      "company": "Headout",
+      "logo": "assets/headout.gif",
+      "hue": 290,
+      "role": "Software Engineer",
+      "summary": "Headout · Magic Listing, Novu, Hub migration",
+      "dates": "May ’23 – Apr ’25",
+      "heroLabel": "Software Engineer · May 2023 – Apr 2025",
+      "tagline": "Headout · Bengaluru",
+      "title": "Magic Listing · Novu · Hub",
+      "intro": "Backend infra that cut operational cost and unlocked scale.",
+      "bullets": [
+        "**Magic Listing**: an AI-driven 3-step workflow replacing 60+ manual fields. Listing time **72 → 4 min** (-95%).",
+        "**Novu-based notifications**: schedule-request turnaround **-40%**, communication errors **-60%**.",
+        "**Schedule Management & Moderation**: one-click supplier-to-Hub migration. Processing time **-33%**, manual effort **-25%**."
+      ],
+      "tags": [
+        "Kotlin",
+        "Spring Boot",
+        "Novu",
+        "GraphQL"
+      ]
+    },
+    {
+      "id": "xp-intern",
+      "company": "Headout",
+      "logo": "assets/headout.gif",
+      "hue": 290,
+      "role": "Software Engineer Intern",
+      "summary": "Headout · Spring WebFlux · B2B Hub foundations",
+      "dates": "Jan ’22 – May ’23",
+      "heroLabel": "Software Engineer Intern · Jan 2022 – May 2023",
+      "tagline": "Headout · Bengaluru",
+      "title": "Hub Backend Foundations",
+      "intro": "An early backend engineer on Hub, Headout’s B2B platform on Spring Boot WebFlux with REST & GraphQL APIs.",
+      "bullets": [
+        "Enforced TDD for **96% code / 87% branch** coverage.",
+        "Re-architected the **London Theatre Direct** integration plugin as its owner. Order success rate **+80%**.",
+        "Spearheaded **Native Listing** for direct supply-partner integration. Operational efficiency **+30%**."
+      ],
+      "tags": [
+        "Java",
+        "Spring WebFlux",
+        "GraphQL"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Stony Brook University",
+      "degree": "MS Computer Science",
+      "detail": "GPA 4.0 · Advisor Prof. Erez Zadok",
+      "dates": "2025 – May 2027",
+      "coursework": [
+        "Distributed Systems",
+        "Database Systems",
+        "Vision Language Models",
+        "Data Science"
+      ]
+    },
+    {
+      "school": "IIIT Sonepat",
+      "degree": "B.Tech Information Technology",
+      "detail": "CGPA 9.35 / 10",
+      "dates": "2019 – 2023",
+      "coursework": [
+        "Data Structures & Algorithms",
+        "Operating Systems",
+        "Networks",
+        "Machine Learning"
+      ]
+    }
+  ],
+  "highlights": [
+    "Teaching Assistant, SBU · CSE 416 & ISE/POL 369 · Spring 2026",
+    "Winner, Smart India Hackathon 2022"
+  ],
+  "projects": [
+    {
+      "id": "p-mvcc",
+      "title": "Column-Delta MVCC",
+      "desc": "Schema-aware MVCC in Mako. 69% less storage on TPC-C.",
+      "pills": [
+        "C++"
+      ],
+      "image": "",
+      "glyph": "Δ",
+      "hue": 270,
+      "tagline": "Research · Distributed databases",
+      "longTitle": "Column-Delta Multi-Version Concurrency Control",
+      "intro": "A schema-aware MVCC optimization in Mako that stores only modified columns.",
+      "bullets": [
+        "**481 lines** of reusable C++ integrated into a distributed KV store.",
+        "**69%** MVCC storage reduction on TPC-C.",
+        "Within **1%** of baseline throughput."
+      ],
+      "tags": [
+        "C++",
+        "Mako",
+        "TPC-C"
+      ],
+      "link": "https://github.com/therealansh",
+      "reel": [
+        {
+          "kind": "line",
+          "text": "MVCC stores a new version of the whole row.",
+          "sub": "Column-Delta stores only the columns that changed."
+        },
+        {
+          "kind": "stat",
+          "value": "69%",
+          "label": "less MVCC storage on TPC-C"
+        },
+        {
+          "kind": "stat",
+          "value": "≤1%",
+          "label": "throughput cost against the baseline"
+        },
+        {
+          "kind": "title",
+          "text": "481 lines of reusable C++ in Mako."
+        }
+      ]
+    },
+    {
+      "id": "p-vlfit",
+      "title": "VLFit",
+      "desc": "Fit-in spatial reasoning benchmark for 6 VLMs.",
+      "pills": [
+        "Python"
+      ],
+      "image": "",
+      "glyph": "VL",
+      "hue": 220,
+      "tagline": "Research · Vision-language models",
+      "longTitle": "VLFit: a spatial reasoning benchmark",
+      "intro": "A vision-language benchmark for fit-in spatial reasoning with 220 image–question pairs across 60–70 categories.",
+      "bullets": [
+        "Evaluated **6** state-of-the-art vision-language models.",
+        "The best reached only **60.9%**; numeric reasoning fell to **5.7%–22.9%**."
+      ],
+      "tags": [
+        "Python",
+        "PyTorch",
+        "VLMs"
+      ],
+      "link": "https://github.com/therealansh",
+      "reel": [
+        {
+          "kind": "line",
+          "text": "Can a vision-language model tell if it fits?"
+        },
+        {
+          "kind": "stat",
+          "value": "220",
+          "label": "image–question pairs across 60–70 categories"
+        },
+        {
+          "kind": "stat",
+          "value": "60.9%",
+          "label": "the best score among 6 state-of-the-art VLMs"
+        },
+        {
+          "kind": "stat",
+          "value": "5.7–22.9%",
+          "label": "on numeric spatial reasoning"
+        },
+        {
+          "kind": "title",
+          "text": "A fit-in spatial reasoning benchmark."
+        }
+      ]
+    },
+    {
+      "id": "p-fxlang",
+      "title": "fxlang",
+      "desc": "An object-oriented language, from scratch in Rust.",
+      "pills": [
+        "Rust"
+      ],
+      "image": "",
+      "glyph": "fn ()",
+      "hue": 30,
+      "tagline": "Side project · Languages",
+      "longTitle": "fxlang",
+      "intro": "An interpreted object-oriented language built from scratch in 2,300 lines of Rust.",
+      "bullets": [
+        "Full pipeline: lexing, parsing, static resolution, and a **tree-walking interpreter**.",
+        "Classes, inheritance, closures, and lexical scoping."
+      ],
+      "tags": [
+        "Rust",
+        "Interpreters"
+      ],
+      "link": "https://github.com/therealansh",
+      "reel": [
+        {
+          "kind": "line",
+          "text": "A programming language, from scratch."
+        },
+        {
+          "kind": "code",
+          "lines": [
+            "fn main() {",
+            "  let x = 42;",
+            "  print(x);",
+            "}"
+          ]
+        },
+        {
+          "kind": "stat",
+          "value": "2,300",
+          "label": "lines of Rust, from lexer to interpreter"
+        },
+        {
+          "kind": "title",
+          "text": "Classes, inheritance, closures, lexical scoping."
+        }
+      ]
+    },
+    {
+      "id": "p-sam",
+      "title": "SAM",
+      "desc": "Face-recognition attendance. Smart India Hackathon winner.",
+      "pills": [
+        "Flutter",
+        "TF"
+      ],
+      "image": "assets/sam-proj.webp",
+      "glyph": "",
+      "hue": 320,
+      "tagline": "Hackathon · 2022",
+      "longTitle": "SAM: Smart Attendance Monitor",
+      "intro": "A face-recognition attendance app for classrooms: offline-first mobile, a retrainable recognition pipeline, and weekly analytics.",
+      "bullets": [
+        "**Smart India Hackathon 2022, Winner.** A national-level hackathon organized by the Government of India.",
+        "On-device retraining with TensorFlow Lite: new faces added in **under 8 seconds** on mid-range Android.",
+        "Analytics with weekly trends, anomaly flagging, and a light-touch appeal flow."
+      ],
+      "tags": [
+        "Flutter",
+        "Dart",
+        "TensorFlow Lite",
+        "OpenCV"
+      ],
+      "link": "https://github.com/therealansh",
+      "reel": [
+        {
+          "kind": "line",
+          "text": "Attendance, by face.",
+          "sub": "Offline-first, with a retrainable recognition pipeline."
+        },
+        {
+          "kind": "image",
+          "src": "assets/sam-proj.webp",
+          "caption": "Native Flutter app"
+        },
+        {
+          "kind": "stat",
+          "value": "<8s",
+          "label": "to add a new face, on-device"
+        },
+        {
+          "kind": "title",
+          "text": "Winner, Smart India Hackathon 2022."
+        }
+      ]
+    }
+  ],
+  "openSource": {
+    "count": "16",
+    "label": "merged PRs across the Kotlin & Rust ecosystems",
+    "repos": [
+      {
+        "name": "gccrs",
+        "note": "GCC Rust frontend · type system & CI",
+        "stars": "2.9k"
+      },
+      {
+        "name": "KotlinDL",
+        "note": "9 PRs · neural-network layers",
+        "stars": "1.6k"
+      },
+      {
+        "name": "Multik · KMath",
+        "note": "ndarray & fast-math utilities",
+        "stars": "730 · 720"
+      },
+      {
+        "name": "nixpkgs",
+        "note": "Packaged zellij",
+        "stars": "25k"
+      }
+    ],
+    "link": "https://github.com/therealansh"
+  },
+  "stack": {
+    "languages": [
+      {
+        "glyph": "Kt",
+        "name": "Kotlin"
+      },
+      {
+        "glyph": "Jv",
+        "name": "Java"
+      },
+      {
+        "glyph": "Rs",
+        "name": "Rust"
+      },
+      {
+        "glyph": "Go",
+        "name": "Go"
+      },
+      {
+        "glyph": "Py",
+        "name": "Python"
+      },
+      {
+        "glyph": "C+",
+        "name": "C/C++"
+      },
+      {
+        "glyph": "SQ",
+        "name": "SQL"
+      },
+      {
+        "glyph": "Js",
+        "name": "JS/Dart"
+      }
+    ],
+    "tools": [
+      "Spring Boot",
+      "Kafka",
+      "RabbitMQ",
+      "PostgreSQL",
+      "Redis",
+      "DynamoDB",
+      "gRPC",
+      "GraphQL",
+      "Kubernetes",
+      "Docker",
+      "AWS",
+      "GCP",
+      "Prometheus",
+      "Grafana"
+    ]
+  },
+  "publication": {
+    "title": "Design and Implementation of Dynamic Lightweight Elliptic Curve Cryptography",
+    "venue": "COMS2, Springer · Feb 2021",
+    "note": "First-author paper on a lighter-weight ECC variant for constrained devices."
+  },
+  "now": {
+    "label": "Local time · NY",
+    "timezone": "America/New_York",
+    "focus": "High-focus",
+    "focusHours": "10p – 2a"
+  },
+  "photos": [
+    {
+      "id": "travel",
+      "emoji": "⛰️",
+      "label": "Travel",
+      "items": [
+        {
+          "src": "assets/photo-2.png",
+          "caption": "Mt. Rainier",
+          "when": "3 weeks ago"
+        },
+        {
+          "src": "assets/photo-3.png",
+          "caption": "Golden hour",
+          "when": "2 months ago"
+        }
+      ]
+    }
+  ],
+  "music": {
+    "title": "Midnight City",
+    "artist": "M83 · Hurry Up, We’re Dreaming",
+    "elapsed": "1:42",
+    "duration": "4:03",
+    "progress": 42
+  },
+  "location": {
+    "city": "Stony Brook, NY",
+    "note": "Based here · open to relocation",
+    "pin": "Stony Brook · 60 mi east",
+    "coords": "40.91°N",
+    "image": "assets/nyc-skyline.png"
+  },
+  "contact": {
+    "eyebrow": "Say hi",
+    "headline": "Let’s build something *unreasonable.*",
+    "note": "Fastest via email. I usually reply within a day."
+  },
+  "footer": "© 2026 Ansh Tyagi · Built with care"
+}

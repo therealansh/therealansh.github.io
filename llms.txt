@@ -1,0 +1,45 @@
+# Ansh Tyagi
+
+> Ansh Tyagi (therealansh) is a backend & distributed systems engineer. 3.5 years in production at Headout and Intuit. MS Computer Science at Stony Brook, GPA 4.0. Available for full-time roles from May 2027.
+
+I’m Ansh, a backend and distributed-systems engineer with 3.5 years in production. Most recently I was on Intuit’s Identity & Session Platform; before that I spent three and a half years at Headout, from intern to senior engineer. I’m finishing an MS in Computer Science at Stony Brook.
+
+## Experience
+- Software Engineer Intern, Intuit (May 2026 – Aug 2026): Identity & Session Platform. Reduced p99 latency from 4.2s to 300ms for bulk authorization in Intuit Enterprise Suite, scaling to 5,000 accounts/user at 200 TPS via a rate-limited async batched-write path that removed DynamoDB hot-partition throttling. Eliminated deployment-related 503 errors (60+ to 0 per rollout) by adding graceful shutdown via Kubernetes preStop hooks.
+- Senior Software Engineer, Headout (Apr 2025 – Jul 2025): Creators Platform & Offers Management. Architected the Creators Platform backend from scratch as sole engineer (Spring Boot, Kafka, Redis), cutting onboarding from 13 days to 10 minutes and growing collaborations from 50 to 700 creators per quarter. Reduced creator impression cost 80% and raised 15-day content completion to 50% by owning the event-driven content pipeline and economics. Built Offers Management for supply partners with configurable discount controls: conversion up to +30%, 66% adoption within a month, discount-related support tickets -12%.
+- Software Engineer, Headout (May 2023 – Apr 2025): Magic Listing · Novu · Hub. Magic Listing: an AI-driven 3-step workflow replacing 60+ manual fields. Listing time 72 → 4 min (-95%). Novu-based notifications: schedule-request turnaround -40%, communication errors -60%. Schedule Management & Moderation: one-click supplier-to-Hub migration. Processing time -33%, manual effort -25%.
+- Software Engineer Intern, Headout (Jan 2022 – May 2023): Hub Backend Foundations. Enforced TDD for 96% code / 87% branch coverage. Re-architected the London Theatre Direct integration plugin as its owner. Order success rate +80%. Spearheaded Native Listing for direct supply-partner integration. Operational efficiency +30%.
+
+## Measured results
+- p99 bulk authorization at Intuit: 4.2s to 300ms (5,000 accounts/user at 200 TPS)
+- 503s per rollout at Intuit: 60+ to 0 (Per rolling deploy, Kubernetes preStop hooks)
+- Vendor listing time at Headout: 72 min to 4 min (AI 3-step flow replacing 60+ manual fields)
+- Creator onboarding at Headout: 13 days to 10 min (Creators Platform, built solo)
+
+## Projects
+- [Column-Delta Multi-Version Concurrency Control](https://github.com/therealansh): A schema-aware MVCC optimization in Mako that stores only modified columns. 481 lines of reusable C++ integrated into a distributed KV store. 69% MVCC storage reduction on TPC-C. Within 1% of baseline throughput.
+- [VLFit: a spatial reasoning benchmark](https://github.com/therealansh): A vision-language benchmark for fit-in spatial reasoning with 220 image–question pairs across 60–70 categories. Evaluated 6 state-of-the-art vision-language models. The best reached only 60.9%; numeric reasoning fell to 5.7%–22.9%.
+- [fxlang](https://github.com/therealansh/fxlang): An interpreted object-oriented language built from scratch in 2,300 lines of Rust. Full pipeline: lexing, parsing, static resolution, and a tree-walking interpreter. Classes, inheritance, closures, and lexical scoping.
+- [SAM: Smart Attendance Monitor](https://github.com/therealansh): A face-recognition attendance app for classrooms: offline-first mobile, a retrainable recognition pipeline, and weekly analytics. Smart India Hackathon 2022, Winner. A national-level hackathon organized by the Government of India. On-device retraining with TensorFlow Lite: new faces added in under 8 seconds on mid-range Android. Analytics with weekly trends, anomaly flagging, and a light-touch appeal flow.
+
+## Education
+- Stony Brook University: MS Computer Science, GPA 4.0 · Advisor Prof. Erez Zadok (2025 – May 2027)
+- IIIT Sonepat: B.Tech Information Technology, CGPA 9.35 / 10 (2019 – 2023)
+
+## Publication
+- A. Tyagi, K. K. Soundra Pandian, S. Khan, "Design and Implementation of Lightweight Dynamic Elliptic Curve Cryptography Using Schoof’s Algorithm," COMS2 2021, Springer CCIS vol. 1416, pp. 193–204. DOI 10.1007/978-3-030-76776-1_13
+
+## Recognition
+- Teaching Assistant, SBU · CSE 416 & ISE/POL 369 · Spring 2026
+- Winner, Smart India Hackathon 2022
+
+## Open source
+- 16 merged PRs across the Kotlin & Rust ecosystems: gccrs, KotlinDL, Multik · KMath, nixpkgs
+
+## Contact
+- Email: ansh.tyagi@stonybrook.edu
+- Website: https://therealansh.com/
+- GitHub: https://github.com/therealansh
+- LinkedIn: https://linkedin.com/in/therealansh
+- ORCID: https://orcid.org/0000-0002-9788-7757
+- Résumé: https://therealansh.com/assets/Resume_2026.pdf

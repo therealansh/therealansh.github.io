@@ -1,5 +1,5 @@
 {
-  "_readme": "Edit this file to update the site. Text wrapped in *single stars* becomes the violet serif accent (hero); **double stars** become bold (modal bullets). Add or remove items in any list and the layout adapts. Each project can have a \"reel\": a list of scenes (kind: line | stat | code | image | title) that plays as a short launch video in the Projects card.",
+  "_readme": "Edit this file to update the site, then run `node prerender.mjs` to refresh the static SEO copy in index.html. **double stars** become bold; *single stars* become the red accent in the contact line. Add or remove items in any list and the layout adapts.",
   "profile": {
     "name": "Ansh Tyagi",
     "role": "Software Engineer",
@@ -7,20 +7,33 @@
     "linkedin": "https://linkedin.com/in/therealansh",
     "github": "https://github.com/therealansh",
     "resume": "assets/Resume_2026.pdf",
-    "avatar": "assets/face-animoji.webp"
+    "avatar": "assets/ansh-tyagi-memoji.webp",
+    "site": "https://therealansh.com/",
+    "orcid": "https://orcid.org/0000-0002-9788-7757",
+    "handle": "therealansh",
+    "photo": "assets/ansh-tyagi-golden-hour.webp",
+    "sameAs": []
   },
   "nav": [
     {
-      "label": "Work",
-      "href": "#work"
+      "label": "Highlights",
+      "href": "#highlights"
+    },
+    {
+      "label": "Performance",
+      "href": "#performance"
+    },
+    {
+      "label": "Experience",
+      "href": "#experience"
     },
     {
       "label": "Projects",
       "href": "#projects"
     },
     {
-      "label": "Skills",
-      "href": "#skills"
+      "label": "Tech Specs",
+      "href": "#specs"
     },
     {
       "label": "Contact",
@@ -28,15 +41,16 @@
     }
   ],
   "hero": {
-    "status": "Open to full time roles starting May 2027",
-    "headline": "Fast systems. *Quietly* reliable.",
-    "lede": "I’m Ansh, a backend and distributed-systems engineer. MS CS at Stony Brook; most recently on Intuit’s Identity & Session Platform, before that three and a half years at Headout.",
+    "title": "Backend & Distributed Systems Engineer",
+    "tagline": "Fast systems. *Quietly reliable.*",
+    "status": "Available for full-time roles from May 2027",
+    "lede": "I’m Ansh, a backend and distributed-systems engineer with 3.5 years in production. Most recently I was on Intuit’s Identity & Session Platform; before that I spent three and a half years at Headout, from intern to senior engineer. I’m finishing an MS in Computer Science at Stony Brook.",
     "facts": [
-      "Stony Brook, NY",
-      "MS Computer Science · GPA 4.0",
-      "ex-Intuit",
-      "ex-Headout"
-    ]
+      "3.5 years in production · Headout → Intuit",
+      "MS Computer Science, Stony Brook · GPA 4.0",
+      "Stony Brook, NY · open to relocation"
+    ],
+    "sub": "3.5 years in production at Headout and Intuit. MS Computer Science at Stony Brook, GPA 4.0."
   },
   "metrics": [
     {
@@ -48,7 +62,8 @@
         4200,
         300
       ],
-      "unit": "ms"
+      "unit": "ms",
+      "conditions": "5,000 accounts/user at 200 TPS"
     },
     {
       "from": "60+",
@@ -59,29 +74,32 @@
         60,
         0
       ],
-      "unit": ""
+      "unit": "",
+      "conditions": "Per rolling deploy, Kubernetes preStop hooks"
     },
     {
-      "from": "72",
+      "from": "72 min",
       "to": "4 min",
-      "label": "vendor listing time",
+      "label": "Vendor listing time",
       "where": "Headout",
       "count": [
         72,
         4
       ],
-      "unit": " min"
+      "unit": " min",
+      "conditions": "AI 3-step flow replacing 60+ manual fields"
     },
     {
       "from": "13 days",
       "to": "10 min",
-      "label": "creator onboarding",
+      "label": "Creator onboarding",
       "where": "Headout",
       "count": [
         18720,
         10
       ],
-      "unit": " min"
+      "unit": " min",
+      "conditions": "Creators Platform, built solo"
     }
   ],
   "experience": [
@@ -113,7 +131,7 @@
     {
       "id": "xp-senior",
       "company": "Headout",
-      "logo": "assets/headout.gif",
+      "logo": "assets/headout.webp",
       "hue": 290,
       "role": "Senior Software Engineer",
       "summary": "Headout · Creators Platform & Offers",
@@ -138,7 +156,7 @@
     {
       "id": "xp-swe",
       "company": "Headout",
-      "logo": "assets/headout.gif",
+      "logo": "assets/headout.webp",
       "hue": 290,
       "role": "Software Engineer",
       "summary": "Headout · Magic Listing, Novu, Hub migration",
@@ -162,7 +180,7 @@
     {
       "id": "xp-intern",
       "company": "Headout",
-      "logo": "assets/headout.gif",
+      "logo": "assets/headout.webp",
       "hue": 290,
       "role": "Software Engineer Intern",
       "summary": "Headout · Spring WebFlux · B2B Hub foundations",
@@ -194,7 +212,8 @@
         "Database Systems",
         "Vision Language Models",
         "Data Science"
-      ]
+      ],
+      "url": "https://www.stonybrook.edu/"
     },
     {
       "school": "IIIT Sonepat",
@@ -206,7 +225,8 @@
         "Operating Systems",
         "Networks",
         "Machine Learning"
-      ]
+      ],
+      "url": "https://iiitsonepat.ac.in/"
     }
   ],
   "highlights": [
@@ -258,7 +278,9 @@
           "kind": "title",
           "text": "481 lines of reusable C++ in Mako."
         }
-      ]
+      ],
+      "video": "assets/reels/mvcc.mp4",
+      "poster": "assets/reels/mvcc.webp"
     },
     {
       "id": "p-vlfit",
@@ -307,7 +329,9 @@
           "kind": "title",
           "text": "A fit-in spatial reasoning benchmark."
         }
-      ]
+      ],
+      "video": "assets/reels/vlfit.mp4",
+      "poster": "assets/reels/vlfit.webp"
     },
     {
       "id": "p-fxlang",
@@ -330,7 +354,7 @@
         "Rust",
         "Interpreters"
       ],
-      "link": "https://github.com/therealansh",
+      "link": "https://github.com/therealansh/fxlang",
       "reel": [
         {
           "kind": "line",
@@ -354,7 +378,9 @@
           "kind": "title",
           "text": "Classes, inheritance, closures, lexical scoping."
         }
-      ]
+      ],
+      "video": "assets/reels/fxlang.mp4",
+      "poster": "assets/reels/fxlang.webp"
     },
     {
       "id": "p-sam",
@@ -364,7 +390,7 @@
         "Flutter",
         "TF"
       ],
-      "image": "assets/sam-proj.webp",
+      "image": "assets/sam-attendance-app.webp",
       "glyph": "",
       "hue": 320,
       "tagline": "Hackathon · 2022",
@@ -390,7 +416,7 @@
         },
         {
           "kind": "image",
-          "src": "assets/sam-proj.webp",
+          "src": "assets/sam-attendance-app.webp",
           "caption": "Native Flutter app"
         },
         {
@@ -402,7 +428,9 @@
           "kind": "title",
           "text": "Winner, Smart India Hackathon 2022."
         }
-      ]
+      ],
+      "video": "assets/reels/sam.mp4",
+      "poster": "assets/reels/sam.webp"
     }
   ],
   "openSource": {
@@ -485,8 +513,12 @@
     ]
   },
   "publication": {
-    "title": "Design and Implementation of Dynamic Lightweight Elliptic Curve Cryptography",
-    "venue": "COMS2, Springer · Feb 2021",
+    "title": "Design and Implementation of Lightweight Dynamic Elliptic Curve Cryptography Using Schoof’s Algorithm",
+    "authors": "A. Tyagi, K. K. Soundra Pandian, S. Khan",
+    "venue": "COMS2 2021, Springer CCIS vol. 1416, pp. 193–204",
+    "year": "2021",
+    "doi": "10.1007/978-3-030-76776-1_13",
+    "url": "https://doi.org/10.1007/978-3-030-76776-1_13",
     "note": "First-author paper on a lighter-weight ECC variant for constrained devices."
   },
   "now": {
@@ -497,19 +529,33 @@
   },
   "photos": [
     {
-      "id": "travel",
-      "emoji": "⛰️",
-      "label": "Travel",
+      "id": "life",
+      "label": "Off the clock",
       "items": [
         {
-          "src": "assets/photo-2.png",
-          "caption": "Mt. Rainier",
-          "when": "3 weeks ago"
+          "src": "assets/ansh-tyagi-ferry.webp",
+          "caption": "On the ferry",
+          "alt": "Ansh Tyagi standing on a ferry deck"
         },
         {
-          "src": "assets/photo-3.png",
+          "src": "assets/mt-rainier-sunset.webp",
+          "caption": "Mt. Rainier",
+          "alt": "Mt. Rainier at sunset seen from an observation deck"
+        },
+        {
+          "src": "assets/ansh-tyagi-golden-hour.webp",
           "caption": "Golden hour",
-          "when": "2 months ago"
+          "alt": "Ansh Tyagi standing in a field at golden hour"
+        },
+        {
+          "src": "assets/pizza-night.webp",
+          "caption": "Pizza night",
+          "alt": "A margherita pizza with basil"
+        },
+        {
+          "src": "assets/shared-plates.webp",
+          "caption": "Shared plates",
+          "alt": "A table of shared plates and flatbread"
         }
       ]
     }
@@ -524,14 +570,78 @@
   "location": {
     "city": "Stony Brook, NY",
     "note": "Based here · open to relocation",
-    "pin": "Stony Brook · 60 mi east",
+    "pin": "60 miles east of New York City · open to relocation",
     "coords": "40.91°N",
-    "image": "assets/nyc-skyline.png"
+    "image": "assets/nyc-skyline.webp",
+    "label": "Location"
   },
   "contact": {
-    "eyebrow": "Say hi",
-    "headline": "Let’s build something *unreasonable.*",
-    "note": "Fastest via email. I usually reply within a day."
+    "headline": "Hiring for backend or infrastructure? *Let’s talk.*",
+    "note": "Email is fastest. I usually reply within a day."
   },
-  "footer": "© 2026 Ansh Tyagi · Built with care"
+  "footer": "© 2026 Ansh Tyagi",
+  "features": [
+    "**3.5 years** shipping production backends at Headout, from intern to Senior SWE",
+    "Cut p99 bulk authorization **4.2s → 300ms** on Intuit’s identity platform",
+    "Took deployment 503s from **60+ to 0** per rollout with graceful Kubernetes shutdown",
+    "Built the Headout Creators Platform backend **from scratch, as the sole engineer**",
+    "**16 merged upstream PRs** across gccrs, KotlinDL, Multik, KMath and nixpkgs",
+    "MS Computer Science, Stony Brook University, **GPA 4.0**"
+  ],
+  "applications": [
+    "Identity, auth & session platforms",
+    "Event-driven pipelines on Kafka & Redis",
+    "Low-latency APIs for 100M+ customers",
+    "Storage engines & concurrency control",
+    "Supply & marketplace backends"
+  ],
+  "revision": "2026.09",
+  "highlights_cards": [
+    {
+      "lead": "Meet Ansh.",
+      "text": "A backend and distributed-systems engineer with 3.5 years in production, finishing an MS at Stony Brook.",
+      "photo": "assets/ansh-tyagi-golden-hour.webp",
+      "imageAlt": "Ansh Tyagi standing in a field at golden hour"
+    },
+    {
+      "lead": "Identity at Intuit scale.",
+      "text": "Summer 2026 on the Identity & Session Platform, the SSO behind TurboTax, QuickBooks, Credit Karma and Mailchimp.",
+      "value": "100M+",
+      "unit": "customers behind those logins"
+    },
+    {
+      "lead": "Intern to senior at Headout.",
+      "text": "Three and a half years, from Hub’s backend foundations to building the Creators Platform as the sole engineer.",
+      "image": "assets/headout-logo.webp",
+      "imageAlt": "Headout logo",
+      "imageW": 480,
+      "imageH": 480
+    },
+    {
+      "lead": "Upstream, in the open.",
+      "text": "Merged pull requests across gccrs, KotlinDL, Multik, KMath and nixpkgs.",
+      "value": "16",
+      "unit": "merged pull requests"
+    },
+    {
+      "lead": "MS Computer Science.",
+      "text": "Stony Brook University, advised by Prof. Erez Zadok. Graduating May 2027.",
+      "value": "4.0",
+      "unit": "GPA"
+    },
+    {
+      "lead": "National hackathon winner.",
+      "text": "SAM, an offline-first face-recognition attendance app, won Smart India Hackathon 2022.",
+      "image": "assets/sam-attendance-app.webp",
+      "imageAlt": "SAM attendance app running on an iPhone",
+      "imageW": 576,
+      "imageH": 1024
+    },
+    {
+      "lead": "Published, first author.",
+      "text": "Lightweight dynamic elliptic-curve cryptography for constrained devices, Springer CCIS 2021.",
+      "value": "1st",
+      "unit": "author, COMS2 2021"
+    }
+  ]
 }

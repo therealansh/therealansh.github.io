@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FittsBench Explorer</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5f5f7; --card: #fff; --ink: #1d1d1f; --dim: #6e6e73; --faint: #a1a1a6;
+    --line: rgba(0,0,0,.07); --seg: #e8e8ed; --seg-on: #fff;
+    --blue: #0071e3; --orange: #e8590c; --grey: #8e8e93;
+    --tint: rgba(0,113,227,.06); --warn: rgba(232,89,12,.08);
+    --shadow: 0 1px 2px rgba(0,0,0,.03), 0 8px 24px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000; --card: #1c1c1e; --ink: #f5f5f7; --dim: #a1a1a6; --faint: #6e6e73;
+      --line: rgba(255,255,255,.08); --seg: #2c2c2e; --seg-on: #636366;
+      --blue: #2997ff; --orange: #ff9f0a; --grey: #8e8e93;
+      --tint: rgba(41,151,255,.1); --warn: rgba(255,159,10,.1); --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  main { max-width: 1040px; margin: 0 auto; padding: 56px 24px 72px; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { font: 12.5px ui-monospace, "SF Mono", Menlo, monospace; background: var(--seg); padding: 1px 5px; border-radius: 5px; }
+  .eyebrow { margin: 0; font-size: 13px; font-weight: 600; color: var(--dim); }
+  h1 { margin: 4px 0 10px; font-size: 44px; line-height: 1.08; font-weight: 700; letter-spacing: -.028em; }
+  .lede { margin: 0 0 36px; max-width: 64ch; font-size: 17px; color: var(--dim); }
+  .card { background: var(--card); border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow); margin: 0 0 16px; }
+  [hidden] { display: none !important; }
+
+  /* Controls */
+  .controls { display: grid; grid-template-columns: 112px 1fr; gap: 14px 16px; align-items: center; }
+  .controls .lbl { font-size: 13px; color: var(--dim); }
+  .controls .hint { margin-left: 10px; font-size: 12px; color: var(--faint); }
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; border-radius: 9px; background: var(--seg); }
+  .seg button { appearance: none; border: 0; background: transparent; color: var(--ink); cursor: pointer;
+                font-family: inherit; font-size: 13px; font-weight: 500; line-height: 1; padding: 7px 14px; border-radius: 7px;
+                transition: background-color .2s ease, box-shadow .2s ease; }
+  .seg button[aria-pressed="true"] { background: var(--seg-on); box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); }
+  .seg button:disabled { cursor: default; }
+  select { appearance: none; -webkit-appearance: none; font-family: inherit; font-size: 13px; font-weight: 500; line-height: 1.2; color: var(--ink);
+           border: 0; border-radius: 8px; padding: 7px 32px 7px 12px; min-width: 240px; max-width: 100%; cursor: pointer;
+           background: var(--seg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238e8e93' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* Status and notes */
+  .state { display: flex; gap: 12px; align-items: center; color: var(--dim); }
+  .state h2 { margin: 0 0 4px; font-size: 17px; font-weight: 600; color: var(--ink); }
+  .state p { margin: 4px 0; }
+  .error { background: var(--warn); box-shadow: none; }
+  .spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--line); border-top-color: var(--dim);
+             animation: spin .8s linear infinite; flex: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .notes { display: grid; gap: 8px; margin: 0 0 16px; }
+  .note { margin: 0; padding: 11px 16px; border-radius: 12px; background: var(--tint); font-size: 13px; color: var(--dim); }
+  .note strong { color: var(--ink); font-weight: 600; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 0 0 16px; }
+  .stat { margin: 0; padding: 18px 20px; }
+  .stat .k { font-size: 12px; font-weight: 500; color: var(--dim); }
+  .stat .v { margin: 4px 0 2px; font-size: 28px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .stat .v small { font-size: 15px; font-weight: 500; color: var(--dim); margin-left: 2px; }
+  .stat .v.na { color: var(--faint); }
+  .stat .s { font-size: 12px; color: var(--faint); }
+
+  /* Chart */
+  .head h2 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -.015em; }
+  .head p { margin: 2px 0 14px; font-size: 13px; color: var(--dim); }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid line { stroke: var(--line); }
+  .tick { fill: var(--faint); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .axis-label { fill: var(--dim); font-size: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 12px; color: var(--dim); }
+  .legend li { display: inline-flex; align-items: center; gap: 7px; }
+  .legend svg { width: 22px; height: 12px; }
+  .empty { padding: 48px 0; text-align: center; color: var(--dim); }
+
+  /* Table */
+  .wrap { overflow-x: auto; margin: 0 -24px; padding: 0 24px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child, th.l, td.l { text-align: left; padding-left: 0; }
+  th { font-weight: 500; font-size: 12px; color: var(--dim); vertical-align: bottom; }
+  th span { display: block; font-weight: 400; color: var(--faint); }
+  tr.anchor td { color: var(--faint); }
+  tfoot td { border-bottom: 0; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 500; background: var(--seg); color: var(--dim); }
+  .pill.held { background: var(--tint); color: var(--blue); }
+  .foot { margin: 12px 0 0; font-size: 12px; color: var(--faint); }
+  footer { margin-top: 28px; font-size: 13px; color: var(--dim); }
+
+  @media (max-width: 720px) {
+    main { padding: 32px 16px 56px; }
+    h1 { font-size: 34px; }
+    .controls { grid-template-columns: 1fr; gap: 6px; }
+    .controls .lbl { margin-top: 8px; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { padding: 18px 16px; }
+    .wrap { margin: 0 -16px; padding: 0 16px; }
+    select { min-width: 0; width: 100%; }
+    #plot { overflow-x: auto; margin: 0 -16px; padding: 0 16px; }
+    #plot svg { min-width: 560px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">FittsBench · final campaign, frozen 7 November 2026</p>
+    <h1>Explorer</h1>
+    <p class="lede">Measured human pointing times beside saved LLM predictions and Fitts baselines. Everything is read
+      from <code>experiments/glm-recheck-2026-11-07/results/</code>; no model is called.</p>
+  </header>
+
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <section id="controls" class="card controls" aria-label="Selection" hidden></section>
+  <div id="notes" class="notes"></div>
+  <section id="stats" class="stats" aria-label="Summary"></section>
+  <section id="chart" class="card" hidden>
+    <div id="head" class="head"></div>
+    <div id="plot"></div>
+    <ul id="legend" class="legend"></ul>
+  </section>
+  <section id="detail" class="card" hidden>
+    <div class="wrap"><table id="table"></table></div>
+    <p id="foot" class="foot"></p>
+  </section>
+
+  <footer><a href="tapping.html">Collect a personal phone or trackpad session →</a></footer>
+</main>
+
+<script>
+// Deployment copy; results are bundled beside this page.
+const BASE = "./results/";
+const SCHEMA = {
+  "predictions.csv": ["cell_id", "dataset", "model", "task", "n_anchors", "prompt_version", "representation",
+                      "anchor_cond_ids", "repeat", "cond_id", "distance", "width", "geom_units", "id_shannon",
+                      "truth", "pred", "parse_status"],
+  "conditions.csv": ["dataset", "cond_id", "distance", "width", "geom_units", "id_shannon", "time_ms", "err_rate"],
+  "table1_dataset_validation.csv": ["dataset", "id_formulation", "a", "b"],
+  "table3_rq2_calibration.csv": ["dataset", "model", "task", "n_anchors", "prompt_version", "representation",
+                                 "primary_mae", "ci_lo", "ci_hi", "same_anchor_fits_mae",
+                                 "same_anchor_fitts_a", "same_anchor_fitts_b"],
+};
+
+const DATASETS = {
+  mackenzie: ["Published", "Stylus · MacKenzie", "MacKenzie (1992) published condition means; geometry in experimental units of 8 px"],
+  pdd: ["Published", "Mouse · Pointing Dynamics", "12 participants, 7,732 trajectories; click-to-click interval"],
+  collected_phone_including: ["Collected", "Phone · all sessions", "8 participant codes, 720 recorded taps including misses"],
+  collected_phone_excluding: ["Collected", "Phone · exclusion variant", "Same phone measurements as “all sessions”; LLM calls generated separately"],
+  collected_trackpad_including: ["Collected", "Trackpad · including P-1GJN7I", "9 participant codes, 810 recorded taps including misses"],
+  collected_trackpad_excluding: ["Collected", "Trackpad · excluding P-1GJN7I", "8 participant codes, 720 recorded taps; high-miss session removed"],
+};
+const MODELS = {
+  "anthropic/claude-opus-5.5": "Claude Opus 5.5", "openai/gpt-6.1-sol": "GPT-6.1 Sol",
+  "google/gemini-4-argon": "Gemini 4 Argon", "deepseek/deepseek-v4.1-flash-1017": "DeepSeek V4.1 Flash 1017",
+  "moonshotai/kimi-k3.1-pro": "Kimi K3.1 Pro", "z-ai/glm-5.3-flash": "GLM 5.3 Flash",
+};
+const PROMPTS = { v1: "v1", v2: "v2", "rq3-v1": "RQ3", "offgrid-v1": "Off-grid" };
+const REPRESENTATIONS = { text: "Text", structured: "Structured", natural_language: "Natural language",
+                          rendered_interface: "Rendered interface", offgrid: "Off-grid text" };
+// Error rates and off-grid fit proxies are different outcomes from measured
+// timing, so each gets its own mode instead of sharing one filtered list.
+const OUTCOMES = {
+  timing: { label: "Measured timing", test: r => r.task === "time" && r.representation !== "offgrid" },
+  error: { label: "Error rate", test: r => r.task === "error" },
+  offgrid: { label: "Off-grid proxy", test: r => r.task === "time" && r.representation === "offgrid" },
+};
+const KEYS = ["dataset", "model", "n_anchors", "prompt_version", "representation"];
+const ORDER = { dataset: Object.keys(DATASETS), model: Object.keys(MODELS), n_anchors: ["0", "1", "3", "5"],
+                prompt_version: Object.keys(PROMPTS), representation: Object.keys(REPRESENTATIONS) };
+const PREFER = { dataset: "mackenzie", model: "anthropic/claude-opus-5.5", n_anchors: "3",
+                 prompt_version: "v1", representation: "text" };
+const LABEL = {
+  dataset: v => DATASETS[v]?.[1] ?? v, model: v => MODELS[v] ?? v, n_anchors: v => v,
+  prompt_version: v => PROMPTS[v] ?? v, representation: v => REPRESENTATIONS[v] ?? v,
+};
+
+const S = { preds: [], conds: [], fits: [], calibration: [], sel: { outcome: "timing" } };
+const $ = id => document.getElementById(id);
+const num = v => (v === "" || v == null ? NaN : Number(v));
+const mean = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : NaN;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const groupBy = (rows, key) => rows.reduce((m, r) => m.set(key(r), [...(m.get(key(r)) || []), r]), new Map());
+
+// Machine-written CSV with no embedded newlines; quoted commas are handled.
+function parseCSV(text) {
+  const lines = text.replace(/\r/g, "").trim().split("\n");
+  const head = splitRow(lines[0]);
+  return lines.slice(1).map(l => Object.fromEntries(splitRow(l).map((v, i) => [head[i], v])));
+}
+function splitRow(line) {
+  const out = []; let cur = "", q = false;
+  for (const ch of line) {
+    if (ch === '"') q = !q;
+    else if (ch === "," && !q) { out.push(cur); cur = ""; }
+    else cur += ch;
+  }
+  out.push(cur); return out;
+}
+
+async function load(name) {
+  try {
+    const r = await fetch(BASE + name);
+    if (!r.ok) return { name, error: `HTTP ${r.status}` };
+    const rows = parseCSV(await r.text());
+    const missing = SCHEMA[name].filter(c => !(rows[0] && c in rows[0]));
+    return missing.length ? { name, error: `unexpected schema, missing ${missing.join(", ")}` } : { name, rows };
+  } catch (e) {
+    return { name, error: globalThis.location?.protocol === "file:"
+      ? "the browser blocks requests from file:// pages" : String(e?.message || e) };
+  }
+}
+
+// Each control only offers values that exist given the choices above it, so
+// no combination can select an empty or mixed slice of the results.
+function cascade() {
+  let rows = S.preds.filter(OUTCOMES[S.sel.outcome].test);
+  const options = {};
+  for (const key of KEYS) {
+    const present = new Set(rows.map(r => r[key]));
+    options[key] = [...ORDER[key].filter(v => present.has(v)), ...[...present].filter(v => !ORDER[key].includes(v)).sort()];
+    if (!present.has(S.sel[key])) S.sel[key] = present.has(PREFER[key]) ? PREFER[key] : options[key][0];
+    rows = rows.filter(r => r[key] === S.sel[key]);
+  }
+  return { options, rows };
+}
+
+function compute(rows) {
+  const { outcome, dataset, model, n_anchors, prompt_version, representation } = S.sel;
+  const scale = outcome === "error" ? 100 : 1;
+  const anchors = new Set((rows[0]?.anchor_cond_ids || "").split(";").filter(Boolean));
+  const calls = [...groupBy(rows, r => r.cell_id).values()];
+  // Primary metric: absolute error averaged within each call, then across calls.
+  const callMAE = calls.map(c => mean(c.map(r => Math.abs(num(r.pred) - num(r.truth)) * scale)));
+
+  const fullFit = outcome === "timing"
+    ? S.fits.find(f => f.dataset === dataset && f.id_formulation.startsWith("Shannon")) : null;
+  const cal = outcome === "timing" ? S.calibration.find(r => r.task === "time" && r.dataset === dataset &&
+    r.model === model && r.n_anchors === n_anchors && r.prompt_version === prompt_version &&
+    r.representation === representation) : null;
+  // A two-parameter line is only fitted from three or more anchors.
+  const same = cal && Number(n_anchors) >= 3 && Number.isFinite(num(cal.same_anchor_fitts_b))
+    ? { a: num(cal.same_anchor_fitts_a), b: num(cal.same_anchor_fitts_b) } : null;
+  const line = f => f && (x => f.a + f.b * x);
+  const ref = line(fullFit && { a: num(fullFit.a), b: num(fullFit.b) }), sa = line(same);
+
+  const points = [...groupBy(rows, r => r.cond_id).values()].map(rs => {
+    const r = rs[0], preds = rs.map(p => num(p.pred) * scale), truth = num(r.truth) * scale;
+    const x = num(r.id_shannon);
+    return { id: r.cond_id, role: "heldout", distance: num(r.distance), width: num(r.width), units: r.geom_units, x,
+             truth, pred: mean(preds), lo: Math.min(...preds), hi: Math.max(...preds), n: preds.length,
+             err: mean(preds.map(p => Math.abs(p - truth))),
+             ref: ref ? ref(x) : NaN, same: sa ? sa(x) : NaN, sameErr: sa ? Math.abs(sa(x) - truth) : NaN };
+  });
+  for (const c of S.conds) if (c.dataset === dataset && anchors.has(c.cond_id)) {
+    const x = num(c.id_shannon);
+    points.push({ id: c.cond_id, role: "anchor", distance: num(c.distance), width: num(c.width), units: c.geom_units,
+                  x, truth: num(c.time_ms), pred: NaN, lo: NaN, hi: NaN, err: NaN,
+                  ref: ref ? ref(x) : NaN, same: sa ? sa(x) : NaN, sameErr: NaN });
+  }
+  points.sort((p, q) => p.x - q.x || p.id.localeCompare(q.id));
+  const held = points.filter(p => p.role === "heldout");
+  return { points, held, anchors: points.filter(p => p.role === "anchor"), calls: calls.length,
+           unit: outcome === "error" ? "%" : "ms", primary: mean(callMAE),
+           repeatSD: callMAE.length > 1 ? Math.sqrt(callMAE.reduce((s, v) => s + (v - mean(callMAE)) ** 2, 0) / (callMAE.length - 1)) : NaN,
+           ci: cal ? [num(cal.ci_lo), num(cal.ci_hi)] : [NaN, NaN],
+           ref, sa, sameMAE: sa ? mean(held.map(p => p.sameErr)) : NaN, archivedSameMAE: cal ? num(cal.same_anchor_fits_mae) : NaN,
+           archivedPrimary: cal ? num(cal.primary_mae) : NaN };
+}
+
+const fmt = (v, d = 1) => Number.isFinite(v) ? v.toFixed(d) : "—";
+const geo = v => Number.isFinite(v) ? String(+v.toFixed(2)) : "—";
+
+function renderControls(options) {
+  const seg = (key, values, label) => `<div class="seg" role="group" aria-label="${esc(key)}">${values.map(v =>
+    `<button type="button" data-key="${key}" data-value="${esc(v)}" aria-pressed="${S.sel[key] === v}"
+      ${values.length === 1 ? "disabled" : ""}>${esc(label(v))}</button>`).join("")}</div>`;
+  const groups = groupBy(options.dataset, v => DATASETS[v]?.[0] ?? "Other");
+  const datasetSelect = `<select data-key="dataset" aria-label="Dataset">${[...groups].map(([g, vs]) =>
+    `<optgroup label="${g}">${vs.map(v => `<option value="${esc(v)}" ${S.sel.dataset === v ? "selected" : ""}>${esc(LABEL.dataset(v))}</option>`).join("")}</optgroup>`).join("")}</select>`;
+  const modelSelect = `<select data-key="model" aria-label="Model" ${options.model.length === 1 ? "disabled" : ""}>${options.model.map(v =>
+    `<option value="${esc(v)}" ${S.sel.model === v ? "selected" : ""}>${esc(LABEL.model(v))}</option>`).join("")}</select>`;
+  const rq3Hint = S.sel.outcome === "timing" && options.representation.length === 1
+    ? `<span class="hint">Other representations: Mouse · GPT-6.1 Sol · 0 anchors · RQ3</span>` : "";
+  $("controls").innerHTML = `
+    <span class="lbl">Outcome</span><div>${seg("outcome", Object.keys(OUTCOMES), v => OUTCOMES[v].label)}</div>
+    <span class="lbl">Dataset</span><div>${datasetSelect}</div>
+    <span class="lbl">Model</span><div>${modelSelect}</div>
+    <span class="lbl">Anchors</span><div>${seg("n_anchors", options.n_anchors, LABEL.n_anchors)}</div>
+    <span class="lbl">Prompt</span><div>${seg("prompt_version", options.prompt_version, LABEL.prompt_version)}</div>
+    <span class="lbl">Representation</span><div>${seg("representation", options.representation, LABEL.representation)}${rq3Hint}</div>`;
+}
+
+function renderNotes(v) {
+  const { outcome, dataset, n_anchors, prompt_version } = S.sel, k = Number(n_anchors), notes = [];
+  if (outcome === "error") notes.push("<strong>Error rate is a separate outcome.</strong> Observed MacKenzie error percentages, predicted by GPT-6.1 Sol only. The Wobbrock baseline is in <code>table6_error_rate.csv</code>.");
+  if (outcome === "offgrid") notes.push("<strong>Not human measurements.</strong> Off-grid references are values of fitted human-data Fitts lines. Scores show agreement with a parametric proxy, not generalisation to people.");
+  if (prompt_version === "rq3-v1") notes.push("<strong>Representation experiment (RQ3).</strong> GPT-6.1 Sol only, eight PDD conditions, zero anchors.");
+  if (dataset === "collected_phone_excluding") notes.push("<strong>Identical phone measurements.</strong> The exclusion only removes a trackpad session. Differences from “all sessions” come from separately generated LLM calls.");
+  if (dataset.startsWith("collected_trackpad")) notes.push("<strong>Sensitivity variant.</strong> P-1GJN7I has a 42.2% miss rate. Both variants are kept and never pooled.");
+  if (outcome === "timing" && k < 3) notes.push(`<strong>No same-anchor Fitts baseline at ${k} anchor${k === 1 ? "" : "s"}.</strong> Its two parameters need at least three measured conditions. The dashed line is a reference fitted to all conditions, including the held-out ones.`);
+  if (dataset.startsWith("collected") && k === 5) notes.push("<strong>One held-out condition.</strong> With five anchors only a single geometry is scored.");
+  $("notes").innerHTML = notes.map(n => `<p class="note">${n}</p>`).join("");
+}
+
+function renderStats(v) {
+  const k = Number(S.sel.n_anchors), u = v.unit === "%" ? "pp" : "ms";
+  const tile = (key, val, unit, sub, d = 1) => `<div class="card stat"><div class="k">${key}</div>
+    <div class="v ${Number.isFinite(val) ? "" : "na"}">${fmt(val, d)}${Number.isFinite(val) && unit ? `<small>${unit}</small>` : ""}</div>
+    <div class="s">${sub}</div></div>`;
+  const ci = Number.isFinite(v.ci[0]) ? ` · 95% CI ${fmt(v.ci[0])}–${fmt(v.ci[1])}` : "";
+  const sameSub = S.sel.outcome !== "timing" ? "Timing outcome only"
+    : k < 3 ? "Needs at least 3 anchors" : "Fitted on the same anchors";
+  $("stats").innerHTML =
+    tile(`${LABEL.model(S.sel.model)} · MAE`, v.primary, u, `Per-call MAE, mean of ${v.calls} calls${ci}`) +
+    tile("Same-anchor Fitts · MAE", v.sameMAE, u, sameSub) +
+    tile("Held-out conditions", v.held.length, "", `${v.anchors.length} anchor${v.anchors.length === 1 ? "" : "s"} shown to the model`, 0) +
+    tile("Repeat SD", v.repeatSD, u, `Across ${v.calls} call MAEs`);
+}
+
+function renderChart(v) {
+  const truthName = S.sel.outcome === "offgrid" ? "Fit proxy" : "Human mean";
+  const { outcome, prompt_version } = S.sel;
+  $("head").innerHTML = `<h2>${esc(LABEL.dataset(S.sel.dataset))}</h2>
+    <p>${esc(DATASETS[S.sel.dataset]?.[2] ?? "")} · ${esc(LABEL.model(S.sel.model))}, ${S.sel.n_anchors} anchors,
+    prompt ${esc(LABEL.prompt_version(prompt_version))}, ${esc(LABEL.representation(S.sel.representation).toLowerCase())}</p>`;
+  if (!v.points.length) {
+    $("plot").innerHTML = `<p class="empty">No predictions match this selection.</p>`;
+    $("legend").innerHTML = ""; return;
+  }
+  const W = 720, H = 340, L = 66, R = 16, T = 12, B = 44;
+  const xs = v.points.map(p => p.x), x0 = Math.min(...xs), x1 = Math.max(...xs), pad = (x1 - x0 || 1) * .06;
+  const ys = v.points.flatMap(p => [p.truth, p.lo, p.hi, p.ref, p.same]).filter(Number.isFinite);
+  const yStep = niceStep(Math.max(...ys) / 4), yMax = Math.ceil(Math.max(...ys) * 1.04 / yStep) * yStep;
+  const sx = x => L + (x - x0 + pad) / (x1 - x0 + 2 * pad) * (W - L - R);
+  const sy = y => H - B - y / yMax * (H - B - T);
+  const yt = Array.from({ length: Math.round(yMax / yStep) + 1 }, (_, i) => i * yStep);
+  const xt = ticks(x0, x1);
+  const seg = (f, dash, color) => f ? `<line x1="${sx(x0 - pad)}" y1="${sy(f(x0 - pad))}" x2="${sx(x1 + pad)}" y2="${sy(f(x1 + pad))}"
+      stroke="${color}" stroke-width="1.5" ${dash ? `stroke-dasharray="${dash}"` : ""}/>` : "";
+  const tip = p => `<title>${esc(p.id)} · ${truthName.toLowerCase()} ${fmt(p.truth)} ${v.unit}${p.role === "anchor" ? " · anchor shown to model"
+      : ` · LLM mean ${fmt(p.pred)} (${fmt(p.lo)}–${fmt(p.hi)}) ${v.unit}`}</title>`;
+  const marks = v.points.map(p => {
+    const cx = sx(p.x);
+    if (p.role === "anchor") return `<circle cx="${cx}" cy="${sy(p.truth)}" r="5" fill="var(--card)" stroke="var(--ink)" stroke-width="1.5">${tip(p)}</circle>`;
+    const human = outcome === "offgrid"
+      ? `<rect x="${cx - 4}" y="${sy(p.truth) - 4}" width="8" height="8" fill="none" stroke="var(--grey)" stroke-width="1.5"/>`
+      : `<circle cx="${cx}" cy="${sy(p.truth)}" r="4.5" fill="var(--ink)"/>`;
+    return `<g>${tip(p)}${human}
+      <line x1="${cx + 7}" x2="${cx + 7}" y1="${sy(p.lo)}" y2="${sy(p.hi)}" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+      <circle cx="${cx + 7}" cy="${sy(p.pred)}" r="4" fill="var(--blue)"/></g>`;
+  }).join("");
+  $("plot").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(truthName)} and LLM predictions against index of difficulty">
+    <g class="grid">${yt.map(y => `<line x1="${L}" x2="${W - R}" y1="${sy(y)}" y2="${sy(y)}"/>`).join("")}</g>
+    ${yt.map(y => `<text class="tick" x="${L - 10}" y="${sy(y) + 4}" text-anchor="end">${fmtTick(y)}</text>`).join("")}
+    ${xt.map(x => `<text class="tick" x="${sx(x)}" y="${H - B + 18}" text-anchor="middle">${x}</text>`).join("")}
+    <text class="axis-label" x="${(W + L) / 2}" y="${H - 6}" text-anchor="middle">Index of difficulty (bits, Shannon)</text>
+    <text class="axis-label" x="14" y="${(H - B) / 2}" text-anchor="middle" transform="rotate(-90 14 ${(H - B) / 2})">${outcome === "error" ? "Error rate (%)" : "Time (ms)"}</text>
+    ${seg(v.ref, "5 4", "var(--grey)")}${seg(v.sa, "", "var(--orange)")}${marks}</svg>`;
+
+  const key = (svg, text) => `<li><svg viewBox="0 0 22 12" aria-hidden="true">${svg}</svg>${text}</li>`;
+  $("legend").innerHTML = [
+    outcome === "offgrid" ? key(`<rect x="7" y="2" width="8" height="8" fill="none" stroke="var(--grey)" stroke-width="1.5"/>`, "Fit proxy (not measured)")
+      : key(`<circle cx="11" cy="6" r="4.5" fill="var(--ink)"/>`, "Human mean, held out"),
+    v.anchors.length ? key(`<circle cx="11" cy="6" r="4.5" fill="none" stroke="var(--ink)" stroke-width="1.5"/>`, "Anchor shown to model (not scored)") : "",
+    key(`<line x1="11" x2="11" y1="0" y2="12" stroke="var(--blue)" stroke-width="1.5" opacity=".55"/><circle cx="11" cy="6" r="4" fill="var(--blue)"/>`, `LLM mean of ${v.calls} calls, bar = range`),
+    v.sa ? key(`<line x1="0" x2="22" y1="6" y2="6" stroke="var(--orange)" stroke-width="1.5"/>`, "Same-anchor Fitts (predictive)") : "",
+    v.ref ? key(`<line x1="0" x2="22" y1="6" y2="6" stroke="var(--grey)" stroke-width="1.5" stroke-dasharray="5 4"/>`, "Reference fit, all conditions (not predictive)") : "",
+  ].join("");
+}
+
+function renderTable(v) {
+  const timing = S.sel.outcome === "timing", u = v.unit, units = v.points[0]?.units === "mm" ? "mm" : "units";
+  const truthName = S.sel.outcome === "offgrid" ? "Fit proxy" : S.sel.outcome === "error" ? "Observed" : "Human";
+  const h = (t, s) => `<th>${t}${s ? `<span>${s}</span>` : ""}</th>`;
+  $("table").innerHTML = `<thead><tr><th class="l">Condition</th>${h("A", units)}${h("W", units)}${h("ID", "bits")}<th class="l">Role</th>
+      ${h(truthName, u)}${h("LLM mean", `${v.calls} calls`)}${h("Range", u)}${h("|Error|", "mean per call")}
+      ${timing ? h("Same-anchor Fitts", u) + h("|Error|", u) + h("Reference fit", "all conditions") : ""}</tr></thead>
+    <tbody>${v.points.map(p => `<tr class="${p.role}"><td>${esc(p.id)}</td><td>${geo(p.distance)}</td><td>${geo(p.width)}</td>
+      <td>${fmt(p.x, 2)}</td><td class="l"><span class="pill ${p.role === "heldout" ? "held" : ""}">${p.role === "heldout" ? "Held out" : "Anchor"}</span></td>
+      <td>${fmt(p.truth)}</td><td>${fmt(p.pred)}</td><td>${p.role === "heldout" ? `${fmt(p.lo)}–${fmt(p.hi)}` : "—"}</td><td>${fmt(p.err)}</td>
+      ${timing ? `<td>${fmt(p.same)}</td><td>${fmt(p.sameErr)}</td><td>${fmt(p.ref)}</td>` : ""}</tr>`).join("")}</tbody>
+    <tfoot><tr><td colspan="8">MAE over ${v.held.length} held-out condition${v.held.length === 1 ? "" : "s"}</td>
+      <td>${fmt(v.primary)}</td>${timing ? `<td></td><td>${fmt(v.sameMAE)}</td><td></td>` : ""}</tr></tfoot>`;
+  $("foot").textContent = `LLM mean and range summarise ${v.calls} repeated calls with prompt ${LABEL.prompt_version(S.sel.prompt_version)}. ` +
+    `|Error| averages each call's absolute error, so the MAE row is the primary metric: per-call MAE averaged over calls. ` +
+    `Anchors were shown to the model and are never scored. The report's tables average prompts v1 and v2; this view shows one prompt.` + (timing ? " The reference fit uses every condition and is context only." : "");
+}
+
+function niceStep(v) {
+  const p = 10 ** Math.floor(Math.log10(v)), m = v / p;
+  return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+}
+function ticks(a, b) {
+  const step = b - a > 4 ? 1 : b - a > 2 ? .5 : .25, out = [];
+  for (let t = Math.ceil(a / step) * step; t <= b + 1e-9; t += step) out.push(+t.toFixed(2));
+  return out;
+}
+const fmtTick = y => y >= 1000 ? y.toLocaleString("en-US") : +y.toFixed(2);
+
+function render() {
+  const { options, rows } = cascade();
+  renderControls(options);
+  const v = compute(rows);
+  renderNotes(v); renderStats(v); renderChart(v); renderTable(v);
+  return v;
+}
+
+function choose(key, value) {
+  S.sel[key] = value;
+  return render();
+}
+
+function setStatus(html, kind = "") {
+  $("status").innerHTML = html ? `<div class="card state ${kind}">${html}</div>` : "";
+}
+
+async function init() {
+  setStatus(`<span class="spinner" aria-hidden="true"></span>Loading final-campaign results…`);
+  const results = await Promise.all(Object.keys(SCHEMA).map(load));
+  const failed = results.filter(r => r.error);
+  if (failed.length) {
+    setStatus(`<div><h2>Results could not be loaded</h2>
+      ${failed.map(f => `<p><code>${esc(BASE + f.name)}</code>: ${esc(f.error)}</p>`).join("")}
+      <p>Serve the repository root, then open the explorer from that server:</p>
+      <p><code>python3 -m http.server 8000</code> → <a href="http://localhost:8000/benchmark/web/">http://localhost:8000/benchmark/web/</a></p></div>`, "error");
+    return false;
+  }
+  const [preds, conds, fits, calibration] = results.map(r => r.rows);
+  Object.assign(S, { preds: preds.filter(r => r.parse_status === "ok"), conds, fits, calibration });
+  setStatus("");
+  for (const id of ["controls", "chart", "detail"]) $(id).hidden = false;
+  $("controls").addEventListener("click", e => {
+    const b = e.target.closest?.("button[data-key]");
+    if (b && b.getAttribute("aria-pressed") !== "true") choose(b.dataset.key, b.dataset.value);
+  });
+  $("controls").addEventListener("change", e => { if (e.target.dataset?.key) choose(e.target.dataset.key, e.target.value); });
+  render();
+  return true;
+}
+
+const ready = init();
+</script>
+</html>

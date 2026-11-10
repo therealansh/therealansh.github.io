@@ -1,0 +1,13 @@
+dataset,dependent_variable,id_formulation,n_conditions,aggregation,a,b,r,loo_cv_mae_ms,reciprocal_slope_bits_per_s,provenance
+collected_phone_excluding,recorded_pointing_task_interval,original Fitts log2(2A/W),6,published condition means,324.35290298791097,59.26956382342007,0.5718290146967906,67.59110740706824,16.872066124516593,collected_excluding
+collected_phone_excluding,recorded_pointing_task_interval,Shannon log2(A/W+1),6,published condition means,342.00992020136357,68.78961184313371,0.5607333465602354,68.5225177253162,14.537078683920729,collected_excluding
+collected_phone_including,recorded_pointing_task_interval,original Fitts log2(2A/W),6,published condition means,324.35290298791097,59.26956382342007,0.5718290146967906,67.59110740706824,16.872066124516593,collected_including
+collected_phone_including,recorded_pointing_task_interval,Shannon log2(A/W+1),6,published condition means,342.00992020136357,68.78961184313371,0.5607333465602354,68.5225177253162,14.537078683920729,collected_including
+collected_trackpad_excluding,recorded_pointing_task_interval,original Fitts log2(2A/W),6,published condition means,399.92318894405713,128.32737487742594,0.7033761947647601,131.72296869196944,7.792569597524822,collected_excluding
+collected_trackpad_excluding,recorded_pointing_task_interval,Shannon log2(A/W+1),6,published condition means,441.74699563597835,147.60834308593917,0.6835626576643166,137.76193673772883,6.7746848118049074,collected_excluding
+collected_trackpad_including,recorded_pointing_task_interval,original Fitts log2(2A/W),6,published condition means,401.70614052726006,120.56698478082873,0.7175614379793572,118.51385158093706,8.294144552240716,collected_including
+collected_trackpad_including,recorded_pointing_task_interval,Shannon log2(A/W+1),6,published condition means,440.84590545781504,138.7393204936581,0.6976367069623064,124.04857717479739,7.207761984431161,collected_including
+mackenzie,mackenzie_mt,original Fitts log2(2A/W),16,published condition means,53.72500000000002,147.85,0.992111103179665,28.578620954348644,6.763611768684478,mackenzie1992_gi_table1
+mackenzie,mackenzie_mt,Shannon log2(A/W+1),16,published condition means,81.36532845274337,172.83647355107755,0.9950506321768336,20.13924933573957,5.7858158029617215,mackenzie1992_gi_table1
+pdd,pdd_click_to_click,original Fitts log2(2A/W),8,equal-weight participant means,-14.670854839929234,183.30330966913758,0.9950602845576861,47.46550692036049,5.45543886689771,pdd_mueller2017:pdd_click_to_click
+pdd,pdd_click_to_click,Shannon log2(A/W+1),8,equal-weight participant means,83.34504130740572,195.43096589637466,0.9956491890587603,50.04648079892023,5.116896370098483,pdd_mueller2017:pdd_click_to_click

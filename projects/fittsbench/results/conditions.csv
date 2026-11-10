@@ -1,0 +1,49 @@
+dataset,cond_id,distance,width,geom_units,distance_px,width_px,id_fitts,id_shannon,nominal_id,time_ms,time_var,err_rate,n,source,device,posture,target_height_mm,n_attempts
+collected_phone_excluding,A32W12,32.0,12.0,mm,,,2.415037499278844,1.874469117916141,,470.778333333383,recorded_pointing_task_interval,0.0666666666666666,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_excluding,A32W4,32.0,4.0,mm,,,4.0,3.169925001442312,,568.3150000000993,recorded_pointing_task_interval,0.3083333333333333,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_excluding,A32W8,32.0,8.0,mm,,,3.0,2.321928094887362,,458.4141666665678,recorded_pointing_task_interval,0.1666666666666666,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_excluding,A48W12,48.0,12.0,mm,,,3.0,2.321928094887362,,459.1008333332837,recorded_pointing_task_interval,0.0583333333333333,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_excluding,A48W4,48.0,4.0,mm,,,4.584962500721156,3.700439718141092,,546.3108333331843,recorded_pointing_task_interval,0.3333333333333333,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_excluding,A48W8,48.0,8.0,mm,,,3.584962500721156,2.807354922057604,,663.2600000001488,recorded_pointing_task_interval,0.175,8.0,collected_excluding,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A32W12,32.0,12.0,mm,,,2.415037499278844,1.874469117916141,,470.778333333383,recorded_pointing_task_interval,0.0666666666666666,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A32W4,32.0,4.0,mm,,,4.0,3.169925001442312,,568.3150000000993,recorded_pointing_task_interval,0.3083333333333333,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A32W8,32.0,8.0,mm,,,3.0,2.321928094887362,,458.4141666665678,recorded_pointing_task_interval,0.1666666666666666,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A48W12,48.0,12.0,mm,,,3.0,2.321928094887362,,459.1008333332837,recorded_pointing_task_interval,0.0583333333333333,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A48W4,48.0,4.0,mm,,,4.584962500721156,3.700439718141092,,546.3108333331843,recorded_pointing_task_interval,0.3333333333333333,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_phone_including,A48W8,48.0,8.0,mm,,,3.584962500721156,2.807354922057604,,663.2600000001488,recorded_pointing_task_interval,0.175,8.0,collected_including,phone,one_hand_thumb: 7 sessions; two_hands_index: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A32W12,32.0,12.0,mm,,,2.415037499278844,1.874469117916141,,641.5783333301545,recorded_pointing_task_interval,0.0,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A32W4,32.0,4.0,mm,,,4.0,3.169925001442312,,965.7125,recorded_pointing_task_interval,0.0166666666666666,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A32W8,32.0,8.0,mm,,,3.0,2.321928094887362,,737.8858333349228,recorded_pointing_task_interval,0.0083333333333333,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A48W12,48.0,12.0,mm,,,3.0,2.321928094887362,,801.1141666680575,recorded_pointing_task_interval,0.0083333333333333,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A48W4,48.0,4.0,mm,,,4.584962500721156,3.700439718141092,,868.6358333339294,recorded_pointing_task_interval,0.0416666666666666,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_excluding,A48W8,48.0,8.0,mm,,,3.584962500721156,2.807354922057604,,1026.2266666650771,recorded_pointing_task_interval,0.0166666666666666,8.0,collected_excluding,trackpad,seated: 7 sessions; standing: 1 sessions,24.0,120.0
+collected_trackpad_including,A32W12,32.0,12.0,mm,,,2.415037499278844,1.874469117916141,,627.0059259229237,recorded_pointing_task_interval,0.0222222222222222,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+collected_trackpad_including,A32W4,32.0,4.0,mm,,,4.0,3.169925001442312,,928.5318518523816,recorded_pointing_task_interval,0.0814814814814814,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+collected_trackpad_including,A32W8,32.0,8.0,mm,,,3.0,2.321928094887362,,727.1985185199314,recorded_pointing_task_interval,0.0666666666666666,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+collected_trackpad_including,A48W12,48.0,12.0,mm,,,3.0,2.321928094887362,,778.3118518529114,recorded_pointing_task_interval,0.0296296296296296,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+collected_trackpad_including,A48W4,48.0,4.0,mm,,,4.584962500721156,3.700439718141092,,846.4785185186952,recorded_pointing_task_interval,0.1037037037037037,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+collected_trackpad_including,A48W8,48.0,8.0,mm,,,3.584962500721156,2.807354922057604,,984.5770370350943,recorded_pointing_task_interval,0.0592592592592592,9.0,collected_including,trackpad,seated: 8 sessions; standing: 1 sessions,24.0,135.0
+mackenzie,A8W8,8.0,8.0,experimental_units,64.0,64.0,1.0,1.0,1.0,254.0,mackenzie_mt,0.0,,mackenzie1992_gi_table1,,,,
+mackenzie,A8W4,8.0,4.0,experimental_units,64.0,32.0,2.0,1.584962500721156,2.0,353.0,mackenzie_mt,0.019,,mackenzie1992_gi_table1,,,,
+mackenzie,A16W8,16.0,8.0,experimental_units,128.0,64.0,2.0,1.584962500721156,2.0,344.0,mackenzie_mt,0.008,,mackenzie1992_gi_table1,,,,
+mackenzie,A8W2,8.0,2.0,experimental_units,64.0,16.0,3.0,2.321928094887362,3.0,481.0,mackenzie_mt,0.017,,mackenzie1992_gi_table1,,,,
+mackenzie,A16W4,16.0,4.0,experimental_units,128.0,32.0,3.0,2.321928094887362,3.0,472.0,mackenzie_mt,0.021,,mackenzie1992_gi_table1,,,,
+mackenzie,A32W8,32.0,8.0,experimental_units,256.0,64.0,3.0,2.321928094887362,3.0,501.0,mackenzie_mt,0.006,,mackenzie1992_gi_table1,,,,
+mackenzie,A8W1,8.0,1.0,experimental_units,64.0,8.0,4.0,3.169925001442312,4.0,649.0,mackenzie_mt,0.088,,mackenzie1992_gi_table1,,,,
+mackenzie,A16W2,16.0,2.0,experimental_units,128.0,16.0,4.0,3.169925001442312,4.0,603.0,mackenzie_mt,0.021,,mackenzie1992_gi_table1,,,,
+mackenzie,A32W4,32.0,4.0,experimental_units,256.0,32.0,4.0,3.169925001442312,4.0,605.0,mackenzie_mt,0.027,,mackenzie1992_gi_table1,,,,
+mackenzie,A64W8,64.0,8.0,experimental_units,512.0,64.0,4.0,3.169925001442312,4.0,694.0,mackenzie_mt,0.025,,mackenzie1992_gi_table1,,,,
+mackenzie,A16W1,16.0,1.0,experimental_units,128.0,8.0,5.0,4.087462841250339,5.0,778.0,mackenzie_mt,0.07,,mackenzie1992_gi_table1,,,,
+mackenzie,A32W2,32.0,2.0,experimental_units,256.0,16.0,5.0,4.087462841250339,5.0,763.0,mackenzie_mt,0.034,,mackenzie1992_gi_table1,,,,
+mackenzie,A64W4,64.0,4.0,experimental_units,512.0,32.0,5.0,4.087462841250339,5.0,804.0,mackenzie_mt,0.023,,mackenzie1992_gi_table1,,,,
+mackenzie,A32W1,32.0,1.0,experimental_units,256.0,8.0,6.0,5.044394119358453,6.0,921.0,mackenzie_mt,0.085,,mackenzie1992_gi_table1,,,,
+mackenzie,A64W2,64.0,2.0,experimental_units,512.0,16.0,6.0,5.044394119358453,6.0,963.0,mackenzie_mt,0.033,,mackenzie1992_gi_table1,,,,
+mackenzie,A64W1,64.0,1.0,experimental_units,512.0,8.0,7.0,6.022367813028454,7.0,1137.0,mackenzie_mt,0.099,,mackenzie1992_gi_table1,,,,
+pdd,ID2_D212,212.0,70.6,mm,765.0,255.0,2.586324176179381,2.001021377062759,2.0,449.8495483669323,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID2_D353,353.0,118.0,mm,1275.0,425.0,2.580881323909339,1.996940200250942,2.0,492.2605686494576,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID4_D212,212.0,14.1,mm,765.0,51.0,4.910297197051768,4.003193924352735,4.0,894.2693389592124,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID4_D353,353.0,23.5,mm,1275.0,85.0,4.908935521593543,4.00191720299429,4.0,881.9754128249206,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID6_D212,212.0,3.32,mm,765.0,12.0,6.9967372129909995,6.019155278672506,6.0,1230.0216700526123,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID6_D353,353.0,5.54,mm,1275.0,20.0,6.993638396996717,6.016104293605884,6.0,1215.6087149033704,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID8_D212,212.0,0.83,mm,765.0,3.0,8.996737212990999,8.002374472165224,8.0,1727.5971505964474,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,
+pdd,ID8_D353,353.0,1.38,mm,1275.0,5.0,8.998856106267736,8.004485108168133,8.0,1601.2484502786892,pdd_click_to_click,,12.0,pdd_mueller2017:pdd_click_to_click,,,,

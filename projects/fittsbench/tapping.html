@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FittsBench Tapping Study</title>
+<style>
+  :root { color-scheme:light dark; --page:#f8fafc; --panel:#fff; --ink:#172033;
+          --muted:#475569; --line:#cbd5e1; --soft:#eff6ff; --accent:#2563eb;
+          --accent-dark:#1d4ed8; --link:#2563eb; --target:#dbeafe; --active:#2563eb; --miss:#dc2626; }
+  @media (prefers-color-scheme:dark) {
+    :root { --page:#0f172a; --panel:#172033; --ink:#f8fafc; --muted:#cbd5e1;
+            --line:#475569; --soft:#1e293b; --target:#1e3a5f; --active:#60a5fa; --link:#93c5fd; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:20px; background:var(--page); font:16px/1.5 system-ui,sans-serif;
+         color:var(--ink); overscroll-behavior:none; }
+  main { max-width:760px; margin:auto; }
+  h1 { font-size:clamp(28px,6vw,42px); line-height:1.08; margin:4px 0 12px; }
+  h2 { font-size:19px; margin:0 0 8px; }
+  p { color:var(--muted); }
+  .lead { font-size:18px; margin:0 0 20px; }
+  a { color:var(--link); }
+  .panel, fieldset { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+                     box-shadow:0 8px 28px #0f172a0a; }
+  .intro { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+  .panel { padding:16px; }
+  .panel p, .panel ol { margin:6px 0; }
+  .panel ol { padding-left:22px; color:var(--muted); }
+  fieldset { margin:14px 0; padding:16px; }
+  legend { color:var(--link); font-weight:700; padding:0 7px; }
+  label { display:block; margin:10px 0; }
+  input, select, button { font:inherit; }
+  input[type=text], select { width:100%; padding:11px; color:var(--ink); background:var(--panel);
+                            border:1px solid var(--line); border-radius:9px; }
+  input[type=range] { width:100%; }
+  button { min-height:46px; border:0; border-radius:10px; padding:11px 16px;
+           background:var(--accent); color:white; font-weight:700; cursor:pointer; }
+  button:not(.target):hover { background:var(--accent-dark); }
+  button:focus-visible { outline:3px solid #b45309; outline-offset:3px; }
+  button[disabled] { opacity:.45; }
+  #begin { width:100%; margin:2px 0 24px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .secondary { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .secondary:hover { background:var(--soft); }
+  .check { display:grid; grid-template-columns:22px 1fr; gap:8px; align-items:start; }
+  .check input { width:18px; height:18px; margin-top:3px; }
+  .hint { display:block; color:var(--muted); font-size:13px; margin-top:4px; }
+  #card-reference { height:20px; border-left:2px solid var(--ink); border-right:2px solid var(--ink);
+                    border-bottom:2px solid var(--ink); margin:22px auto 8px; }
+  [hidden] { display:none !important; }
+  .session-head { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+                  padding:14px 16px; margin-bottom:12px; }
+  .session-head .row { justify-content:space-between; }
+  .session-head p { margin:5px 0 0; }
+  #board { position:relative; width:100%; min-height:340px; background:var(--panel);
+           border:1px solid var(--line); border-radius:14px; overflow:hidden;
+           touch-action:none; user-select:none; }
+  .target { position:absolute; top:50%; transform:translate(-50%,-50%); padding:0;
+            background:var(--panel); border:2px solid var(--ink); border-radius:7px; min-height:0; }
+  .target.active { background:var(--active); }
+  .target.active::before { content:"TAP"; position:absolute; bottom:calc(100% + 12px);
+                           left:50%; transform:translateX(-50%); color:var(--ink);
+                           font-size:14px; pointer-events:none; }
+  .target:focus-visible { outline:3px solid #f59e0b; outline-offset:3px; }
+  progress { width:100%; height:16px; accent-color:var(--accent); }
+  #flash { position:absolute; width:18px; height:18px; border-radius:50%; pointer-events:none;
+           transform:translate(-50%,-50%); border:3px solid var(--miss); opacity:0; }
+  #flash.show { animation:fade .45s; }
+  @keyframes fade { from{opacity:1} to{opacity:0} }
+  .small { font-size:13px; }
+  .task-help { text-align:center; margin:10px 0; }
+  #done { text-align:center; padding:28px 18px; }
+  #done h2 { font-size:26px; }
+  #done .download { width:100%; margin:10px 0 4px; }
+  #setup-error { color:var(--ink); font-weight:650; }
+  #practice-ready { margin:12px 0; }
+  @media (prefers-reduced-motion:reduce) { #flash.show { animation:none; } }
+  @media (max-width:560px) {
+    body { padding:14px; }
+    .intro { grid-template-columns:1fr; }
+    #board { min-height:390px; }
+  }
+</style>
+
+<main>
+  <h1>Quick pointing study</h1>
+  <p class="lead">Tap alternating targets as quickly and accurately as you can.</p>
+  <p class="small">Collector 2.0.0 · Practice, then 90 recorded attempts</p>
+
+  <div class="intro">
+    <section class="panel">
+      <h2>What you will do</h2>
+      <ol><li>Confirm your device and match the line to a card.</li><li>Try 6 practice attempts.</li><li>Complete 6 short blocks (90 recorded attempts).</li></ol>
+    </section>
+    <section class="panel">
+      <h2>Your privacy</h2>
+      <p>Nothing is uploaded. Your browser downloads one anonymous JSON file for you to send to the researcher.</p>
+    </section>
+  </div>
+
+  <section id="setup">
+    <fieldset>
+      <legend>Step 1 of 2 · Session details</legend>
+      <label>Anonymous participant code
+        <input id="participant" type="text" autocomplete="off" maxlength="64" required>
+        <span class="hint">A code is generated for you. Please do not enter your name.</span>
+      </label>
+      <label>Session purpose
+        <select id="purpose"><option value="study">Study session</option><option value="pilot">Equipment / instruction pilot</option></select>
+        <span class="hint">Study session is selected. Choose Pilot only for equipment or instruction checks.</span>
+      </label>
+      <label>Device you will use
+        <select id="device"><option value="phone">Phone touchscreen</option><option value="trackpad">Trackpad</option></select>
+      </label>
+      <label>How you will use it
+        <select id="posture"></select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Step 2 of 2 · Match the screen size</legend>
+      <p>Place the <strong>short edge</strong> of a standard credit/debit card against the line. Move the slider until both ends match.</p>
+      <div id="card-reference" aria-hidden="true"></div>
+      <label>Adjust line length
+        <input id="calibration" type="range" min="160" max="420" value="300" aria-describedby="calibration-value">
+      </label>
+      <output id="calibration-value" class="hint"></output>
+      <label class="check"><input id="calibrated" type="checkbox"><span>I matched the line to the card's short edge. I will keep the same orientation and zoom.</span></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Before you start</legend>
+      <p>Sit comfortably and use only the selected device. Use the filled target marked TAP. After <strong>every attempt, even a miss</strong>, aim for the newly marked target on the other side. Do not retry the previous side.</p>
+      <p>Keep the page open. Take breaks only before the first tap of a new block. Use an actual trackpad if you select Trackpad; the browser cannot distinguish it from a mouse.</p>
+      <label class="check"><input id="consent" type="checkbox"><span>I agree to take part and allow my anonymous tap timing and position data to be used for this course project.</span></label>
+    </fieldset>
+    <p id="setup-error" role="alert" hidden></p>
+    <button id="begin">Start practice</button>
+  </section>
+
+  <section id="experiment" hidden>
+    <div class="session-head">
+      <div class="row"><strong id="condition"></strong><strong id="overall">0 of 90</strong></div>
+      <progress id="progress" max="90" value="0" aria-label="Overall session progress"></progress>
+      <p><span id="condition-detail"></span> <span id="status" role="status" aria-live="polite"></span></p>
+    </div>
+    <p id="task-help" class="task-help">Tap the <strong>filled target marked TAP</strong>. A successful first tap starts the block and is not counted. Then switch sides after every attempt, even a miss.</p>
+    <section id="practice-ready" class="panel" hidden>
+      <h2>Practice complete</h2>
+      <p>During recording, keep switching sides even after a miss. Breaks belong between blocks, before the first tap.</p>
+      <label class="check"><input id="understood" type="checkbox"><span>I understand that every attempt switches the target, including misses.</span></label>
+      <div class="row"><button id="start-recorded">Start recorded blocks</button><button id="repeat-practice" class="secondary">Repeat practice</button></div>
+      <p id="practice-error" role="alert" hidden></p>
+    </section>
+    <div id="board" aria-label="Reciprocal pointing task">
+      <button id="left" class="target" type="button" aria-label="Left target"></button>
+      <button id="right" class="target" type="button" aria-label="Right target"></button>
+      <span id="flash"></span>
+    </div>
+    <p id="controls" class="row"><button id="reset" class="secondary">Stop and save incomplete session</button></p>
+    <section id="done" class="panel" hidden>
+      <h2 id="done-title">Session complete</h2>
+      <p id="done-detail">Download the original JSON file and send it to Ansh.</p>
+      <button id="download" class="download" disabled>Download session file</button>
+      <p id="downloaded" class="small" role="status" aria-live="polite"></p>
+      <button id="new-session" class="secondary">Start a new session</button>
+    </section>
+  </section>
+</main>
+
+<script>
+const COLLECTOR_VERSION = "2.0.0", PROTOCOL_VERSION = "alternating-attempts-v2";
+const TIMING_DEFINITION = "pointerdown_handler_to_pointerdown_handler_ms";
+const REFERENCE_MM = 53.98, TRIALS_PER_CONDITION = 15, PRACTICE_ATTEMPTS = 6, TARGET_HEIGHT_MM = 24;
+const conditions = [32, 48].flatMap(amplitude_mm => [4, 8, 12].map(width_mm => ({
+  cond_id:`A${amplitude_mm}W${width_mm}`, amplitude_mm, width_mm
+})));
+const order = [conditions[4], conditions[0], conditions[5], conditions[2], conditions[3], conditions[1]];
+const $ = id => document.getElementById(id);
+const state = { phase:"setup", block:0, measured:0, active:"left", lastTime:null, trials:[],
+  practice:[], starts:[], interruptions:[], pending:[], pxPerMm:1, complete:false, downloaded:false };
+$("participant").value = `P-${crypto.getRandomValues(new Uint32Array(1))[0].toString(36).toUpperCase().slice(0,6)}`;
+
+function setPostures() {
+  const choices = $("device").value === "phone"
+    ? [["one_hand_thumb", "One hand, thumb"], ["two_hands_index", "Two hands, index finger"]]
+    : [["seated", "Seated, normal trackpad use"], ["standing", "Standing"]];
+  $("posture").innerHTML = choices.map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+}
+$("device").value = matchMedia("(pointer: coarse)").matches ? "phone" : "trackpad";
+setPostures();
+$("device").addEventListener("change", setPostures);
+
+function calibrate() {
+  $("card-reference").style.width = `${Number($("calibration").value)}px`;
+  $("calibration-value").textContent = "Match the two ends exactly. Do not change zoom after matching.";
+  $("calibrated").checked = false;
+}
+function fitCalibrationToScreen() {
+  const available = $("card-reference").parentElement.clientWidth - 34;
+  $("calibration").max = Math.max(160, Math.min(420, Math.floor(available)));
+  if (Number($("calibration").value) > Number($("calibration").max)) $("calibration").value = $("calibration").max;
+  calibrate();
+}
+$("calibration").addEventListener("input", calibrate);
+fitCalibrationToScreen();
+state.setupView = viewport();
+
+function viewport() {
+  return {width:innerWidth, height:innerHeight, scale:window.visualViewport?.scale || 1};
+}
+function current() { return order[state.phase === "practice" ? 0 : state.block]; }
+function layout() {
+  const c = current(), board = $("board");
+  for (const side of ["left", "right"]) {
+    const el = $(side);
+    el.style.width = `${c.width_mm * state.pxPerMm}px`;
+    el.style.height = `${TARGET_HEIGHT_MM * state.pxPerMm}px`;
+    el.style.left = `${board.clientWidth / 2 + (side === "left" ? -1 : 1) * c.amplitude_mm * state.pxPerMm / 2}px`;
+    el.classList.toggle("active", side === state.active);
+    el.setAttribute("aria-label", `${side} target${side === state.active ? ", tap here" : ", inactive"}`);
+  }
+  $("condition").textContent = state.phase === "practice" ? "Practice · 6 attempts" : `Block ${state.block + 1} of ${order.length}`;
+  $("condition-detail").textContent = `${c.amplitude_mm} mm apart · ${c.width_mm} mm target.`;
+}
+function fits() {
+  // Check the widest condition up front, without changing the calibrated scale.
+  const width = $("board").clientWidth || state.boardSize?.width || 0;
+  const height = $("board").clientHeight || state.boardSize?.height || 0;
+  return 60 * state.pxPerMm + 4 <= width && TARGET_HEIGHT_MM * state.pxPerMm + 64 <= height;
+}
+function geometry() {
+  const board = $("board").getBoundingClientRect();
+  const targets = {};
+  for (const side of ["left", "right"]) {
+    const r = $(side).getBoundingClientRect();
+    targets[side] = {x:r.left - board.left, y:r.top - board.top, width:r.width, height:r.height};
+  }
+  return {board_width_px:$("board").clientWidth, board_height_px:$("board").clientHeight, targets, viewport:viewport()};
+}
+function resetBlock() {
+  state.measured = 0; state.active = "left"; state.lastTime = null; state.pending = [];
+  $("status").textContent = "Tap the filled starting target once.";
+  layout();
+}
+function finish(complete, reason) {
+  state.complete = complete; state.endReason = reason; state.phase = "done";
+  $("condition").textContent = complete ? "All 6 blocks complete" : "Session stopped";
+  $("condition-detail").textContent = "";
+  $("status").textContent = "Save your original file below.";
+  for (const id of ["board", "task-help", "controls", "practice-ready"]) $(id).hidden = true;
+  $("done").hidden = false; $("download").disabled = false;
+  $("done-title").textContent = complete ? "Session complete" : "Incomplete session";
+  $("done-detail").textContent = complete
+    ? "Download the original JSON file and send it to Ansh. Keep it even if you missed targets."
+    : `${reason} Save this incomplete file for review, then start a new session and recalibrate. It will not enter the completed-session analysis.`;
+}
+function noteInterruption(kind) {
+  if (!["practice", "recorded", "ready"].includes(state.phase)) return;
+  const item = {id:state.interruptions.length, kind, phase:state.phase, cond_id:current()?.cond_id || null,
+    after_attempt:state.measured, time_ms:performance.now(), viewport:viewport()};
+  state.interruptions.push(item);
+  if (state.lastTime !== null) state.pending.push(item.id);
+}
+function checkViewport() {
+  if (state.phase === "setup") {
+    const view = viewport();
+    if (view.width !== state.setupView.width || view.scale !== state.setupView.scale) fitCalibrationToScreen();
+    state.setupView = view; return;
+  }
+  if (!["practice", "recorded", "ready"].includes(state.phase)) return;
+  const view = viewport();
+  if (JSON.stringify(view) === JSON.stringify(state.lastView)) return;
+  noteInterruption("viewport_change"); state.lastView = view;
+  if (view.width !== state.initialView.width || Math.abs(view.scale - state.initialView.scale) > 0.001 || !fits()) {
+    finish(false, "The screen width or zoom changed, so the calibrated geometry is no longer reliable.");
+  }
+}
+function select(event) {
+  if (!["practice", "recorded"].includes(state.phase)) return;
+  event.preventDefault();
+  const expectedPointer = state.details.device === "phone" ? "touch" : "mouse";
+  if (!event.isPrimary || event.button !== 0 || event.pointerType !== expectedPointer) {
+    $("status").textContent = "Use only the selected device: one touch or a normal left click."; return;
+  }
+  checkViewport();
+  if (state.phase === "done") return;
+  if (!fits()) { finish(false, "The full target geometry no longer fits on screen."); return; }
+  const board = $("board").getBoundingClientRect(), rect = $(state.active).getBoundingClientRect();
+  const x = event.clientX - board.left, y = event.clientY - board.top;
+  const cx = rect.left + rect.width / 2 - board.left, cy = rect.top + rect.height / 2 - board.top;
+  const hit = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+  const now = performance.now(), c = current();
+  const point = {cond_id:c.cond_id, amplitude_mm:c.amplitude_mm, width_mm:c.width_mm,
+    target_height_mm:TARGET_HEIGHT_MM, target_side:state.active, target_center_x_px:cx, target_center_y_px:cy,
+    tap_x_px:x, tap_y_px:y, offset_x_px:x-cx, offset_y_px:y-cy, hit, pointer_type:event.pointerType,
+    event_time_ms:now};
+  if (state.lastTime === null) {
+    if (!hit) { $("status").textContent = "Not started yet. Tap the filled target marked TAP."; return; }
+    state.starts.push({...point, phase:state.phase, practice_round:state.practiceRound, geometry:geometry()});
+  } else {
+    if (now <= state.lastTime) return;
+    state.measured += 1;
+    const row = {...point, trial_index:state.measured, time_ms:now-state.lastTime, interruption_ids:[...state.pending]};
+    if (state.phase === "practice") state.practice.push({...row, practice_round:state.practiceRound});
+    else state.trials.push(row);
+    state.pending = [];
+    if (!hit) {
+      const flash = $("flash"); flash.style.left=`${x}px`; flash.style.top=`${y}px`;
+      flash.classList.remove("show"); void flash.offsetWidth; flash.classList.add("show");
+    }
+    $("progress").value = state.trials.length;
+    $("overall").textContent = `${state.trials.length} of 90 recorded`;
+  }
+  state.lastTime = now;
+  state.active = state.active === "left" ? "right" : "left";
+  const limit = state.phase === "practice" ? PRACTICE_ATTEMPTS : TRIALS_PER_CONDITION;
+  if (state.measured === limit) {
+    state.lastTime = null;
+    if (state.phase === "practice") {
+      state.phase = "ready"; $("board").hidden = true; $("task-help").hidden = true;
+      $("practice-ready").hidden = false; $("status").textContent = "Practice saved separately from your recorded attempts.";
+    } else {
+      state.block += 1;
+      if (state.block === order.length) finish(true, "completed");
+      else resetBlock();
+    }
+  } else {
+    $("status").textContent = `${state.measured} of ${limit} ${state.phase === "practice" ? "practice" : "recorded"} attempts. Aim for the other side.`;
+    layout();
+  }
+}
+$("board").addEventListener("pointerdown", select);
+$("board").addEventListener("pointercancel", () => noteInterruption("pointer_cancel"));
+$("board").addEventListener("contextmenu", event => event.preventDefault());
+$("board").addEventListener("keydown", event => {
+  if (["Enter", " "].includes(event.key)) {
+    event.preventDefault(); $("status").textContent = "This pointing task records your selected touch or trackpad input, not keyboard presses.";
+  }
+});
+
+$("begin").addEventListener("click", () => {
+  if (state.phase !== "setup") return;
+  const error = !$("participant").value.trim() ? "Keep or enter an anonymous participant code."
+    : !$("consent").checked ? "Confirm consent before starting."
+    : !$("calibrated").checked ? "Match the card's short edge and confirm calibration first." : "";
+  $("setup-error").hidden = !error; $("setup-error").textContent = error;
+  if (error) return;
+  state.pxPerMm = Number($("calibration").value) / REFERENCE_MM;
+  $("setup").hidden = true; $("experiment").hidden = false;
+  if (!fits()) {
+    $("setup").hidden = false; $("experiment").hidden = true;
+    $("setup-error").hidden = false;
+    $("setup-error").textContent = "The full targets do not fit at this calibrated size. Use a larger screen or change orientation, then recalibrate. Do not shorten the line to force a fit.";
+    $("calibrated").checked = false; return;
+  }
+  state.details = {participant_id:$("participant").value.trim(), device:$("device").value,
+    posture:$("posture").value, collection_purpose:$("purpose").value};
+  state.sessionId = new Date().toISOString(); state.consentAt = state.sessionId;
+  state.initialView = viewport(); state.lastView = state.initialView;
+  state.boardSize = {width:$("board").clientWidth, height:$("board").clientHeight};
+  state.referencePx = Number($("calibration").value);
+  state.phase = "practice"; state.practiceRound = 1;
+  resetBlock();
+  $("experiment").scrollIntoView({block:"start"});
+});
+$("repeat-practice").addEventListener("click", () => {
+  if (state.phase !== "ready") return;
+  state.phase = "practice"; state.practiceRound += 1;
+  $("understood").checked = false; $("practice-error").hidden = true;
+  $("practice-ready").hidden = true; $("board").hidden = false; $("task-help").hidden = false;
+  resetBlock();
+});
+$("start-recorded").addEventListener("click", () => {
+  if (state.phase !== "ready") return;
+  if (!$("understood").checked) {
+    $("practice-error").textContent = "Confirm that you understand the switching rule, or repeat practice.";
+    $("practice-error").hidden = false; return;
+  }
+  checkViewport(); if (state.phase === "done") return;
+  state.phase = "recorded"; state.block = 0;
+  $("practice-ready").hidden = true; $("board").hidden = false; $("task-help").hidden = false;
+  resetBlock();
+  $("experiment").scrollIntoView({block:"start"});
+});
+function exportSession() {
+  const payload = {schema_version:2, collector_version:COLLECTOR_VERSION, protocol_version:PROTOCOL_VERSION,
+    timing_definition:TIMING_DEFINITION, ...state.details, session_id:state.sessionId,
+    consent:{confirmed:true, confirmed_at_utc:state.consentAt},
+    calibration:{method:"credit_card_short_edge", reference_mm:REFERENCE_MM, reference_px:state.referencePx, px_per_mm:state.pxPerMm},
+    condition_order:order, trials_per_condition:TRIALS_PER_CONDITION, complete:state.complete,
+    end_reason:state.endReason, initial_viewport:state.initialView, block_starts:state.starts,
+    practice_trials:state.practice, interruptions:state.interruptions, trials:state.trials};
+  const blob = new Blob([JSON.stringify(payload,null,2)+"\n"], {type:"application/json"});
+  const url = URL.createObjectURL(blob), link = document.createElement("a");
+  link.href = url;
+  const safeId = payload.participant_id.replace(/[^a-zA-Z0-9_-]/g, "_");
+  link.download = `heldout-${safeId}-${payload.device}-${state.sessionId.replaceAll(":","-")}.json`;
+  document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  state.downloaded = true;
+  $("downloaded").textContent = "Download requested. Check your Downloads or Files folder and send the JSON to Ansh.";
+}
+$("download").addEventListener("click", exportSession);
+$("reset").addEventListener("click", () => {
+  if (confirm("Stop this session? You can save the incomplete file for review.")) finish(false, "Stopped by participant.");
+});
+$("new-session").addEventListener("click", () => {
+  if (confirm("Have you saved this JSON file? Starting again clears this page's session.")) location.reload();
+});
+addEventListener("resize", checkViewport);
+window.visualViewport?.addEventListener("resize", checkViewport);
+addEventListener("blur", () => noteInterruption("window_blur"));
+document.addEventListener("visibilitychange", () => { if (document.hidden) noteInterruption("page_hidden"); });
+addEventListener("beforeunload", event => {
+  if (state.phase !== "setup" && !state.downloaded) { event.preventDefault(); event.returnValue = ""; }
+});
+</script>
+</html>
